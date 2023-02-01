@@ -6,6 +6,13 @@
 *   
 */
 
+//Sound manager
+//Should be able to loop sound
+//Should be able to play one shot
+//Should be able to handle different sounds at the same time
+//Should be able to stop a sound
+//Should be able to adjust the volume of the sound
+
 namespace Shard
 {
     abstract public class Sound
