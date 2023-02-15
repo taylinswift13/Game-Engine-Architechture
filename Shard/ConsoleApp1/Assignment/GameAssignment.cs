@@ -9,15 +9,15 @@ namespace Shard
     {
         GameObject top, left, right, bottom;
         Random rand;
+        public static Player player = new Player();
         public override void update()
         {
         }
 
         public override void initialize()
         {
-            Player p = new Player();
-            p.Transform.X = 50;
-            p.Transform.Y = 50;
+            player.Transform.X = 50;
+            player.Transform.Y = 50;
         }
 
         public override int getTargetFrameRate()

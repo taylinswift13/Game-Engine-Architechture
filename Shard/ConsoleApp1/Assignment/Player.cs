@@ -1,17 +1,17 @@
 ﻿
 using Shard;
-
+using System;
+using System.Collections.Generic;
 namespace GameAssignment
 {
     class Player : GameObject, InputListener, CollisionHandler
     {
         private int health;
-
         public int Health { get => health; set => health = value; }
-
+        List<string> animation = new List<string>();
         public override void initialize()
         {
-            this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("Untitled.png");
+            this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("player_idle1.png");
             setPhysicsEnabled();
             MyBody.addRectCollider();
 
@@ -25,7 +25,12 @@ namespace GameAssignment
             Transform.Scalex = 2;
             Transform.Scaley = 2;
 
-            Transform.rotate(90);
+            //animation test
+            for (int i = 1; i <= 4; i++)
+            {
+                string idleAnimationIndex = "player_idle" + i + ".png";
+                animation.Add(idleAnimationIndex);
+            }
         }
 
         public void handleInput(InputEvent inp, string eventType)
@@ -33,10 +38,20 @@ namespace GameAssignment
 
         }
 
-
+        int index = 0; int counter = 0;
         public override void update()
         {
             Bootstrap.getDisplay().addToDraw(this);
+            if (animation.Count <= 1) return;
+
+            counter++;
+            if (counter % 5 == 0)
+            {
+                counter = 0;
+                if (index <= animation.Count - 1) { index++; }
+            }
+            if (index == animation.Count) { index = 0; }
+            this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath(animation[index]);
         }
 
         public void onCollisionEnter(PhysicsBody x)
