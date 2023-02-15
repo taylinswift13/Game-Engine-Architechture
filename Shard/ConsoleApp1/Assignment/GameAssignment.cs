@@ -10,7 +10,7 @@ namespace Shard
     {
         GameObject top, left, right, bottom;
         Random rand;
-
+        Sound bgm;
         public override void update()
         {
             //Bootstrap.getDisplay().showText("FPS: " + Bootstrap.getSecondFPS() + " / " + 

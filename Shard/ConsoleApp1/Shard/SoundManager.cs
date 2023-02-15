@@ -8,17 +8,18 @@
 
 using SDL2;
 using System;
+using System.IO;
 
 namespace Shard
 { 
     public class SoundManager : Sound
     {
+        SDL.SDL_AudioSpec have, want;
+        uint length, dev;
+        IntPtr buffer;
+
         public override void playSound(string file)
         {
-            SDL.SDL_AudioSpec have, want;
-            uint length, dev;
-            IntPtr buffer;
-
             file = Bootstrap.getAssetManager().getAssetPath(file);
 
             SDL.SDL_LoadWAV(file, out have, out buffer, out length);
@@ -27,6 +28,8 @@ namespace Shard
             int success = SDL.SDL_QueueAudio(dev, buffer, length);
             SDL.SDL_PauseAudioDevice(dev, 0);
         }
+
+        
     }
 }
 

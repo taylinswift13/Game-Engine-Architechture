@@ -13,10 +13,18 @@
 //Should be able to stop a sound
 //Should be able to adjust the volume of the sound
 
+using SDL2;
+using System;
+
 namespace Shard
 {
     abstract public class Sound
     {
+        uint ID;
+        float volume;
+        float pitch;
+        bool looping;
+
         abstract public void playSound(string file);
     }
 
