@@ -21,8 +21,6 @@ namespace Shard
 
         public override void initialize()
         {
-            p.Transform.X = 50;
-            p.Transform.Y = 50;
             player.Transform.X = 50;
             player.Transform.Y = 50;
         }

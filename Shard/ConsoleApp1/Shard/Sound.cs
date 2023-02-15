@@ -20,11 +20,6 @@ namespace Shard
 {
     abstract public class Sound
     {
-        uint ID;
-        float volume;
-        float pitch;
-        bool looping;
-
         abstract public void playSound(string file);
     }
 
