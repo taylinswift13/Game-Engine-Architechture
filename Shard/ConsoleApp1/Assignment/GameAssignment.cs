@@ -1,5 +1,7 @@
 ﻿using GameAssignment;
+
 using SDL2;
+
 using System;
 using System.Collections.Generic;
 using System.Numerics;
@@ -10,7 +12,7 @@ namespace Shard
     {
         GameObject top, left, right, bottom;
         Random rand;
-        Sound bgm;
+        public static Player player = new Player();
         public override void update()
         {
             //Bootstrap.getDisplay().showText("FPS: " + Bootstrap.getSecondFPS() + " / " + 
@@ -19,9 +21,10 @@ namespace Shard
 
         public override void initialize()
         {
-            Player p = new Player();
             p.Transform.X = 50;
             p.Transform.Y = 50;
+            player.Transform.X = 50;
+            player.Transform.Y = 50;
         }
 
         public override int getTargetFrameRate()
