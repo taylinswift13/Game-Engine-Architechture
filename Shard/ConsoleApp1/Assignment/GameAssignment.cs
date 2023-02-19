@@ -10,8 +10,9 @@ namespace Shard
 {
     class GameAssignment : Game, InputListener
     {
-        GameObject top, left, right, bottom;
-        Random rand;
+        //GameObject top, left, right, bottom;
+        //Random rand;
+
         public static Player player = new Player();
         public override void update()
         {
@@ -21,6 +22,8 @@ namespace Shard
 
         public override void initialize()
         {
+
+            Bootstrap.getSound().playSound("sparks fly.wav", 0.1f);
             player.Transform.X = 50;
             player.Transform.Y = 50;
         }

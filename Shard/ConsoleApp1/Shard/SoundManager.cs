@@ -10,26 +10,39 @@ using SDL2;
 using System;
 using System.IO;
 
+
 namespace Shard
-{ 
+{
     public class SoundManager : Sound
     {
-        SDL.SDL_AudioSpec have, want;
-        uint length, dev;
-        IntPtr buffer;
-
-        public override void playSound(string file)
+        public override void playSound(string file, float volume)
         {
             file = Bootstrap.getAssetManager().getAssetPath(file);
 
-            SDL.SDL_LoadWAV(file, out have, out buffer, out length);
-            dev = SDL.SDL_OpenAudioDevice(IntPtr.Zero, 0, ref have, out want, 0);
+            if (SDL_mixer.Mix_OpenAudio(44100, SDL.AUDIO_S16SYS, 2, 4096) == -1)
+            {
+                Console.WriteLine("Error: " + SDL.SDL_GetError());
+                return;
+            }
 
-            int success = SDL.SDL_QueueAudio(dev, buffer, length);
-            SDL.SDL_PauseAudioDevice(dev, 0);
+            IntPtr chunk = SDL_mixer.Mix_LoadWAV(file);
+
+            if (chunk == IntPtr.Zero)
+            {
+                Console.WriteLine("Error: " + SDL.SDL_GetError());
+                return;
+            }
+
+            int channel = SDL_mixer.Mix_PlayChannel(-1, chunk, 0);
+
+            if (channel == -1)
+            {
+                Console.WriteLine("Error: " + SDL.SDL_GetError());
+            }
+            else
+            {
+                SDL_mixer.Mix_Volume(channel, (int)(volume * SDL_mixer.MIX_MAX_VOLUME));
+            }
         }
-
-        
     }
 }
-
