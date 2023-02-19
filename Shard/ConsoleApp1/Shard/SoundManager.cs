@@ -15,7 +15,7 @@ namespace Shard
 {
     public class SoundManager : Sound
     {
-        public override void playSound(string file, float volume)
+        public override void playSound(string file, float volume, bool loop = false)
         {
             file = Bootstrap.getAssetManager().getAssetPath(file);
 
@@ -33,7 +33,7 @@ namespace Shard
                 return;
             }
 
-            int channel = SDL_mixer.Mix_PlayChannel(-1, chunk, 0);
+            int channel = SDL_mixer.Mix_PlayChannel(-1, chunk, loop ? -1 : 0);
 
             if (channel == -1)
             {
