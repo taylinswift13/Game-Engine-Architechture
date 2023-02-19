@@ -232,7 +232,11 @@ namespace Shard
                 tRect.w = sRect.w;
                 tRect.h = sRect.h;
 
-                SDL.SDL_RenderCopyEx(_rend, sprite, ref sRect, ref tRect, (int)trans.Rotz, IntPtr.Zero, SDL.SDL_RendererFlip.SDL_FLIP_NONE);
+                SDL.SDL_RendererFlip flip;
+                if (trans.Flip) { flip = SDL.SDL_RendererFlip.SDL_FLIP_HORIZONTAL; }
+                else { flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE; }
+
+                SDL.SDL_RenderCopyEx(_rend, sprite, ref sRect, ref tRect, (int)trans.Rotz, IntPtr.Zero, flip);
             }
 
             foreach (Circle c in _circlesToDraw)

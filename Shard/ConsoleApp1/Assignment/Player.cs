@@ -37,6 +37,7 @@ namespace GameAssignment
             MyBody.Mass = 1000;
             MyBody.MaxForce = 20;
             MyBody.Drag = 0.3f;
+            MyBody.UsesGravity = true;
             MyBody.addRectCollider();
 
             wid = Bootstrap.getDisplay().getWidth();
@@ -49,11 +50,13 @@ namespace GameAssignment
                 if (inp.Key == (int)SDL.SDL_Scancode.SDL_SCANCODE_D)
                 {
                     right = true;
+                    this.Transform.Flip = false;
                 }
 
                 if (inp.Key == (int)SDL.SDL_Scancode.SDL_SCANCODE_A)
                 {
                     left = true;
+                    this.Transform.Flip = true;
                 }
 
             }
@@ -75,8 +78,10 @@ namespace GameAssignment
         public override void update()
         {
             Bootstrap.getDisplay().addToDraw(this);
-            //playAnimation(idleAnimationClip, 10);
-            playAnimation(runAnimationClip, 7);
+
+            if (right || left) playAnimation(runAnimationClip, 7);
+            else playAnimation(idleAnimationClip, 10);
+
         }
 
         public override void physicsUpdate()
@@ -129,7 +134,9 @@ namespace GameAssignment
                 if (index <= animationClip.Count - 1) { index++; }
             }
             if (index == animationClip.Count) { index = 0; }
-            this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath(animationClip[index]);
+
+            if (index > animationClip.Count - 1) return;
+            else this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath(animationClip[index]);
         }
 
         public void onCollisionEnter(PhysicsBody x)
