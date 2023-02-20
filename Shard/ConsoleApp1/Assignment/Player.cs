@@ -18,7 +18,7 @@ namespace GameAssignment
             right = false;
 
             this.Transform.X = 50.0f;
-            this.Transform.Y = 600.0f;
+            this.Transform.Y = 100.0f;
             this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("player_idle1.png");
             this.Transform.Scalex = 3;
             this.Transform.Scaley = 3;

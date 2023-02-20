@@ -12,8 +12,6 @@ namespace Shard
     {
         //GameObject top, left, right, bottom;
         //Random rand;
-
-        public static Player player = new Player();
         public override void update()
         {
             //Bootstrap.getDisplay().showText("FPS: " + Bootstrap.getSecondFPS() + " / " + 
@@ -24,8 +22,7 @@ namespace Shard
         {
 
             Bootstrap.getSound().playSound("sparks fly.wav", 0.1f);
-            player.Transform.X = 50;
-            player.Transform.Y = 50;
+            Player player = new Player();
         }
 
         public override int getTargetFrameRate()
