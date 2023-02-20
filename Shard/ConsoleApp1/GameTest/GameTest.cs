@@ -11,10 +11,8 @@ namespace Shard
         List<GameObject> asteroids;
         public override void update()
         {
-            
-            Bootstrap.getDisplay().showText("FPS: " + Bootstrap.getSecondFPS() + " / " + Bootstrap.getFPS(), 10, 10, 12, 255, 255, 255);
-
-
+            Bootstrap.getDisplay().showText("FPS: " + Bootstrap.getSecondFPS() + 
+                                            " / " + Bootstrap.getFPS(), 10, 10, 12, 255, 255, 255);
         }
 
         public override int getTargetFrameRate()
@@ -30,35 +28,27 @@ namespace Shard
 
             GameObject asteroid;
 
-
-
-    
 //            asteroid.MyBody.Kinematic = true;
      
-
-
             background = new GameObject();
             background.Transform.SpritePath = getAssetManager().getAssetPath ("background2.jpg");
             background.Transform.X = 0;
             background.Transform.Y = 0;
-
-
         }
 
         public override void initialize()
         {
+            Bootstrap.getSound().initializeAudioSystem();
             Bootstrap.getInput().addListener(this);
             createShip();
-
             asteroids = new List<GameObject>();
-
-
         }
 
         public void handleInput(InputEvent inp, string eventType)
         {
 
-            if (eventType == "MouseDown") {
+            if (eventType == "MouseDown") 
+            {
                 Console.WriteLine ("Pressing button " + inp.Button);
             }
 
@@ -72,14 +62,13 @@ namespace Shard
 
             if (eventType == "MouseDown" && inp.Button == 3)
             {
-                foreach (GameObject ast in asteroids) {
+                foreach (GameObject ast in asteroids) 
+                {
                     ast.ToBeDestroyed = true;
                 }
 
                 asteroids.Clear();
             }
-
-
         }
     }
 }

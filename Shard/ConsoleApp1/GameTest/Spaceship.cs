@@ -55,7 +55,7 @@ namespace GameTest
 
             b.Transform.rotate(this.Transform.Rotz);
 
-            //Bootstrap.getSound().playSound ("fire.wav");
+            Bootstrap.getSound().playSound ("fire.wav", 0.5f);
         }
 
         public void handleInput(InputEvent inp, string eventType)
