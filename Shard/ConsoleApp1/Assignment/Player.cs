@@ -9,6 +9,7 @@ namespace GameAssignment
         private int health;
         bool left, right;
         int wid;
+
         public int Health { get => health; set => health = value; }
         List<string> idleAnimationClip = new List<string>();
         List<string> runAnimationClip = new List<string>();

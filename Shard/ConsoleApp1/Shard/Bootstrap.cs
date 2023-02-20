@@ -1,4 +1,4 @@
-﻿/*
+﻿ /*
 *
 *   The Bootstrap - this loads the config file, processes it and then starts the game loop
 *   @author Michael Heron

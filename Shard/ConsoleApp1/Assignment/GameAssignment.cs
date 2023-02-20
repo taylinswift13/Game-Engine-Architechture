@@ -22,9 +22,10 @@ namespace Shard
 
         public override void initialize()
         {
-            Bootstrap.getSound().playSound("fire.wav", 0.1f, true);
             player.Transform.X = 50;
             player.Transform.Y = 50;
+            Bootstrap.getSound().initializeAudioSystem();
+            Bootstrap.getSound().playSound("fire.wav", 0.1f, true);
         }
 
         public override int getTargetFrameRate()
