@@ -10,9 +10,9 @@ namespace GameAssignment
     {
         private int health;
         bool left, right, jumpUp, isJumping;
-        double jumpCount;
-        private double speed = 100, jumpSpeed = 260;
+        double jumpCount, jumpSpeed = 260;
         int wid;
+        AnimationSystem idle;
 
         public int Health { get => health; set => health = value; }
         List<string> idleAnimationClip = new List<string>();
@@ -31,8 +31,10 @@ namespace GameAssignment
             this.Transform.Scaley = 3;
 
             //animation test
+
             loadAnimation("player_idle", 4, idleAnimationClip);
             loadAnimation("player_run", 6, runAnimationClip);
+            //idle.loadAnimation("player_idle", 4);
 
             Bootstrap.getInput().addListener(this);
 
@@ -96,6 +98,8 @@ namespace GameAssignment
 
         public override void update()
         {
+            //idle.playAnimation(4, 5, this.Transform);
+            Bootstrap.playerPos = new Vector2(this.Transform.X, this.Transform.Y);
             Bootstrap.getDisplay().addToDraw(this);
             Bootstrap.getDisplay().showText("SPACE to jump", 10, 10, 20, System.Drawing.Color.White);
             Bootstrap.getDisplay().showText("E to inverse gravity", 10, 35, 20, System.Drawing.Color.White);
@@ -151,8 +155,8 @@ namespace GameAssignment
         {
             for (int i = 1; i <= frames; i++)
             {
-                string idleAnimationIndex = fileName + i + ".png";
-                animation.Add(idleAnimationIndex);
+                string frame = fileName + i + ".png";
+                animation.Add(frame);
             }
         }
         //how to make these two variable inside the function?

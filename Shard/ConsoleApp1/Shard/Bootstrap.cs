@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Numerics;
 
 namespace Shard
 {
@@ -17,6 +18,9 @@ namespace Shard
     {
         public static string DEFAULT_CONFIG = "config.cfg";
         public static int gravityDir = 1;
+        public static Vector2 playerPos;
+        public static Vector2 Position;
+        public static Vector2 Size;
 
         private static Game runningGame;
         private static Display displayEngine;
