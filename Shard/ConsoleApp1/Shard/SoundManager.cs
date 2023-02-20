@@ -71,5 +71,9 @@ namespace Shard
             }
         }
 
+        public override void stopSound(int channel)
+        {
+            SDL_mixer.Mix_HaltChannel(channel);
+        }
     }
 }

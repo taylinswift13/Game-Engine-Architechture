@@ -30,7 +30,6 @@ namespace Shard
         abstract public void initializeAudioSystem();
         abstract public int playSound(string file, float volume, bool loop = false);
         abstract public SoundStatus getSoundStatus(int channel);
+        abstract public void stopSound(int channel);
     }
-
-
 }
