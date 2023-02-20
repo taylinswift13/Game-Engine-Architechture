@@ -2,6 +2,8 @@
 using Shard;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
+
 namespace GameAssignment
 {
     class Player : GameObject, InputListener, CollisionHandler

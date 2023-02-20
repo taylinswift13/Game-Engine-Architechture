@@ -11,6 +11,7 @@
 using SDL2;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace Shard
 {
@@ -108,7 +109,6 @@ namespace Shard
 
             foreach (TextDetails td in myTexts)
             {
-
                 SDL.SDL_Rect sRect;
 
                 sRect.x = (int)td.X;
@@ -116,19 +116,14 @@ namespace Shard
                 sRect.w = 0;
                 sRect.h = 0;
 
-
                 SDL_ttf.TTF_SizeText(td.Font, td.Text, out sRect.w, out sRect.h);
                 SDL.SDL_RenderCopy(_rend, td.LblText, IntPtr.Zero, ref sRect);
-
             }
-
             SDL.SDL_RenderPresent(_rend);
-
         }
 
         public override void display()
         {
-
             update();
             draw();
         }
@@ -207,9 +202,8 @@ namespace Shard
             td.LblText = lblText;
 
             myTexts.Add(td);
-
-
         }
+
         public override void showText(char[,] text, double x, double y, int size, int r, int g, int b)
         {
             string str = "";
@@ -228,7 +222,6 @@ namespace Shard
                 row += 1;
 
             }
-
         }
     }
 }

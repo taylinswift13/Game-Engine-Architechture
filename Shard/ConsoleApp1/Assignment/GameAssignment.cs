@@ -10,6 +10,8 @@ namespace Shard
 {
     class GameAssignment : Game, InputListener
     {
+        Camera camera;
+        Player player;
         //GameObject top, left, right, bottom;
         //Random rand;
 
@@ -19,6 +21,19 @@ namespace Shard
         SoundStatus sound1Status, sound2Status;
         string BGM = "sparks fly.wav";
         string fire = "fire.wav";
+
+        public override void initialize()
+        {
+            sm.initializeAudioSystem();
+            sound1Channel = sm.playSound(BGM, 0.5f, true);
+            //sound2Channel = sm.playSound(fire, 0.7f, false);
+
+            player = new Player();
+            camera = new Camera()
+            {
+                Size = new Vector2(1080, 720)
+            };
+        }
 
         public override void update()
         {
@@ -30,14 +45,10 @@ namespace Shard
 
             //sound2Status = sm.getSoundStatus(sound2Channel);
             //Console.WriteLine("Sound 2 status: " + sound2Status);
-        }
 
-        public override void initialize()
-        {
-            sm.initializeAudioSystem();
-            sound1Channel = sm.playSound(BGM, 0.5f, true);
-            //sound2Channel = sm.playSound(fire, 0.7f, false);
-            Player player = new Player();
+            camera.FollowGameObject(player);
+            Console.WriteLine("camera: " + camera.Position.X + " " + camera.Position.Y);
+            Console.WriteLine("player: " + player.Transform.X + " " + player.Transform.Y);
         }
 
         public override int getTargetFrameRate()

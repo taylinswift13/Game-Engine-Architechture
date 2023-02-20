@@ -242,8 +242,6 @@ namespace Shard
             bool physUpdate = false;
             bool physDebug = false;
 
-
-
             // Setup the engine.
             setup();
 
@@ -345,8 +343,6 @@ namespace Shard
                 lastTick = timeInMillisecondsStart;
 
             } 
-
-
         }
     }
 }
