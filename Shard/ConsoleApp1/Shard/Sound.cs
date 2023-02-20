@@ -18,11 +18,18 @@ using System;
 
 namespace Shard
 {
-    abstract public class Sound
+    public enum SoundStatus
     {
-        abstract public void playSound(string file, float volume, bool loop = false);
-        abstract public void initializeAudioSystem();
+        Stopped,
+        Playing,
+        Paused
     }
 
-
+    abstract public class Sound
+    {
+        abstract public void initializeAudioSystem();
+        abstract public int playSound(string file, float volume, bool loop = false);
+        abstract public SoundStatus getSoundStatus(int channel);
+        abstract public void stopSound(int channel);
+    }
 }
