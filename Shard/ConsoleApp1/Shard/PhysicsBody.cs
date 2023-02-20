@@ -54,6 +54,7 @@ namespace Shard
         private bool impartForce;
         private bool passThrough;
         private bool usesGravity;
+        private bool applyForce;
         private Color debugColor;
         public Color DebugColor { get => debugColor; set => debugColor = value; }
 
@@ -206,7 +207,7 @@ namespace Shard
         {
             Vector2 reflect = new Vector2(0, 0);
 
-            Debug.Log ("Reflecting " + impulse);
+            Debug.Log("Reflecting " + impulse);
 
             // We're being pushed to the right, so we must have collided with the right.
             if (impulse.X > 0)
@@ -241,11 +242,13 @@ namespace Shard
 
         }
 
-        public void reduceForces(float prop) {
+        public void reduceForces(float prop)
+        {
             force *= prop;
         }
 
-        public void addForce(Vector2 dir, float force) {
+        public void addForce(Vector2 dir, float force)
+        {
             addForce(dir * force);
         }
 
@@ -310,15 +313,17 @@ namespace Shard
 
             force = this.force.Length();
 
-			trans.translate(this.force);
+
 
             if (force < Drag)
             {
                 stopForces();
+                return;
             }
-            else if (force > 0)
+            else
             {
                 this.force = (this.force / force) * (force - Drag);
+                trans.translate(this.force);
             }
 
 
@@ -397,7 +402,7 @@ namespace Shard
         {
             Vector2? d;
 
-//            Debug.Log("Checking collision with " + other);
+            //            Debug.Log("Checking collision with " + other);
             foreach (Collider c in myColliders)
             {
                 d = c.checkCollision(other);

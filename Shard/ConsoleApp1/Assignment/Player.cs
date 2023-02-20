@@ -9,7 +9,9 @@ namespace GameAssignment
     class Player : GameObject, InputListener, CollisionHandler
     {
         private int health;
-        bool left, right;
+        bool left, right, jumpUp, isJumping;
+        double jumpCount;
+        private double speed = 100, jumpSpeed = 260;
         int wid;
 
         public int Health { get => health; set => health = value; }
@@ -19,9 +21,11 @@ namespace GameAssignment
         {
             left = false;
             right = false;
+            jumpUp = false;
+            isJumping = false;
 
             this.Transform.X = 50.0f;
-            this.Transform.Y = 100.0f;
+            this.Transform.Y = 400.0f;
             this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("player_idle1.png");
             this.Transform.Scalex = 3;
             this.Transform.Scaley = 3;
@@ -36,11 +40,10 @@ namespace GameAssignment
             right = false;
 
             setPhysicsEnabled();
-
-            MyBody.Mass = 1000;
-            MyBody.MaxForce = 20;
-            MyBody.Drag = 0.3f;
+            MyBody.Mass = 1;
             MyBody.UsesGravity = true;
+            MyBody.StopOnCollision = true;
+            //MyBody.addRectCollider((int)Transform.X, (int)Transform.Y + 1, 22, 23);
             MyBody.addRectCollider();
 
             wid = Bootstrap.getDisplay().getWidth();
@@ -53,13 +56,26 @@ namespace GameAssignment
                 if (inp.Key == (int)SDL.SDL_Scancode.SDL_SCANCODE_D)
                 {
                     right = true;
-                    this.Transform.Flip = false;
+                    this.Transform.FlipHorizontal = false;
                 }
 
                 if (inp.Key == (int)SDL.SDL_Scancode.SDL_SCANCODE_A)
                 {
                     left = true;
-                    this.Transform.Flip = true;
+                    this.Transform.FlipHorizontal = true;
+                }
+
+                if (inp.Key == (int)SDL.SDL_Scancode.SDL_SCANCODE_SPACE && !isJumping)
+                {
+                    jumpUp = true;
+                }
+
+                //inverse gravity
+                if (inp.Key == (int)SDL.SDL_Scancode.SDL_SCANCODE_E)
+                {
+                    Bootstrap.gravityDir = -Bootstrap.gravityDir;
+                    if (!Transform.FlipVertical) Transform.FlipVertical = true;
+                    else Transform.FlipVertical = false;
                 }
 
             }
@@ -81,10 +97,25 @@ namespace GameAssignment
         public override void update()
         {
             Bootstrap.getDisplay().addToDraw(this);
-
+            Bootstrap.getDisplay().showText("SPACE to jump", 10, 10, 20, System.Drawing.Color.White);
+            Bootstrap.getDisplay().showText("E to inverse gravity", 10, 35, 20, System.Drawing.Color.White);
             if (right || left) playAnimation(runAnimationClip, 7);
             else playAnimation(idleAnimationClip, 10);
 
+            if (jumpUp)
+            {
+                if (jumpCount < 0.3f)
+                {
+                    this.Transform.translate(0, -Bootstrap.gravityDir * jumpSpeed * Bootstrap.getDeltaTime());
+                    jumpCount += Bootstrap.getDeltaTime();
+                    isJumping = true;
+                }
+                else
+                {
+                    jumpCount = 0;
+                    jumpUp = false;
+                }
+            }
         }
 
         public override void physicsUpdate()
@@ -92,12 +123,12 @@ namespace GameAssignment
             double boundsx;
             if (left)
             {
-                MyBody.addForce(this.Transform.Forward, -1 * 500f);
+                this.Transform.translate(-5, 0);
             }
 
             if (right)
             {
-                MyBody.addForce(this.Transform.Forward, 500);
+                this.Transform.translate(5, 0);
             }
 
             if (this.Transform.X < 0)
@@ -144,21 +175,17 @@ namespace GameAssignment
 
         public void onCollisionEnter(PhysicsBody x)
         {
-            Health -= 1;
-
-            if (Health <= 0)
-            {
-                this.ToBeDestroyed = true;
-            }
+            isJumping = false;
         }
 
         public void onCollisionExit(PhysicsBody x)
         {
-
         }
 
         public void onCollisionStay(PhysicsBody x)
         {
+
+            MyBody.stopForces();
         }
 
         public override string ToString()

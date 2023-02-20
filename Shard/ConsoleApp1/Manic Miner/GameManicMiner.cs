@@ -13,9 +13,11 @@ namespace Shard
         MinerWilly player;
         List<Collectible> collect;
 
-        public override bool isRunning() {       
+        public override bool isRunning()
+        {
 
-            if (player == null || player.ToBeDestroyed) {
+            if (player == null || player.ToBeDestroyed)
+            {
                 return false;
             }
 
@@ -27,7 +29,7 @@ namespace Shard
                 }
             }
 
-            return false;
+            return true;
 
         }
 
@@ -49,7 +51,7 @@ namespace Shard
             Platform p;
             Bootstrap.getInput().addListener(this);
             rand = new Random();
-        
+
             player = new MinerWilly();
             collect = new List<Collectible>();
 
@@ -60,18 +62,20 @@ namespace Shard
             {
                 p = new Platform();
 
-                if (i == 2) {
+                if (i == 2)
+                {
                     p.setPosition(450, 800, 256, 50);
                     p.MoveDirX = 1;
                 }
-                else {
+                else
+                {
                     p.setPosition(0 + (i * 256), 832, 0, 0);
                 }
 
-          }
+            }
 
 
-           p = new Platform();
+            p = new Platform();
             p.setPosition(30, 800, 600, 150);
 
             p = new Platform();
@@ -100,8 +104,8 @@ namespace Shard
 
 
             c = new Collectible();
-            c.Transform.translate (840, 560);
-            collect.Add (c);
+            c.Transform.translate(840, 560);
+            collect.Add(c);
 
             c = new Collectible();
             c.Transform.translate(840, 60);
@@ -111,7 +115,7 @@ namespace Shard
 
 
         public void handleInput(InputEvent inp, string eventType)
-        {            
+        {
         }
     }
 }

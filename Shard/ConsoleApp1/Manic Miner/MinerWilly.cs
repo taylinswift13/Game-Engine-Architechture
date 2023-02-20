@@ -26,8 +26,7 @@ namespace ManicMiner
             MyBody.Mass = 1;
             Bootstrap.getInput().addListener(this);
 
-
-            Transform.translate (0, 800);
+            //Transform.translate(0, 800);
             MyBody.StopOnCollision = false;
             MyBody.Kinematic = false;
 
@@ -56,26 +55,26 @@ namespace ManicMiner
                 if (inp.Key == (int)SDL.SDL_Scancode.SDL_SCANCODE_SPACE && canJump == true)
                 {
                     jumpUp = true;
-                    Debug.Log ("Jumping up");
+                    Debug.Log("Jumping up");
                 }
 
             }
 
             else if (eventType == "KeyUp")
+            {
+
+                if (inp.Key == (int)SDL.SDL_Scancode.SDL_SCANCODE_D)
                 {
+                    right = false;
 
-                    if (inp.Key == (int)SDL.SDL_Scancode.SDL_SCANCODE_D)
-                    {
-                        right = false;
+                }
 
-                    }
+                if (inp.Key == (int)SDL.SDL_Scancode.SDL_SCANCODE_A)
+                {
+                    left = false;
+                }
 
-                    if (inp.Key == (int)SDL.SDL_Scancode.SDL_SCANCODE_A)
-                    {
-                        left = false;
-                    }
 
-                   
 
             }
 
@@ -97,14 +96,17 @@ namespace ManicMiner
                 spriteTimer += Bootstrap.getDeltaTime();
             }
 
-            if (jumpUp) {
+            if (jumpUp)
+            {
                 fall = false;
                 fallCounter = 0;
-                if (jumpCount < 0.3f) {
+                if (jumpCount < 0.3f)
+                {
                     this.Transform.translate(0, -1 * jumpSpeed * Bootstrap.getDeltaTime());
                     jumpCount += Bootstrap.getDeltaTime();
                 }
-                else {
+                else
+                {
                     jumpCount = 0;
                     jumpUp = false;
                     fall = true;
@@ -122,7 +124,7 @@ namespace ManicMiner
                 if (spriteCounter >= 4)
                 {
                     spriteCounterDir = -1;
-                    
+
                 }
 
                 if (spriteCounter <= 1)
@@ -134,12 +136,14 @@ namespace ManicMiner
 
             }
 
-            if (fall) {
+            if (fall)
+            {
                 Transform.translate(0, jumpSpeed * Bootstrap.getDeltaTime());
                 fallCounter += Bootstrap.getDeltaTime();
 
-                if (Transform.Y > 900) {
-                    ToBeDestroyed = true;
+                if (Transform.Y > 900)
+                {
+                    // ToBeDestroyed = true;
                 }
 
             }
@@ -155,10 +159,12 @@ namespace ManicMiner
             float[] minAndMaxX = x.getMinAndMax(true);
             float[] minAndMaxY = x.getMinAndMax(false);
 
-            if (Transform.X + Transform.Wid >= minAndMaxX[0] && Transform.X <= minAndMaxX[1]) {
+            if (Transform.X + Transform.Wid >= minAndMaxX[0] && Transform.X <= minAndMaxX[1])
+            {
                 // We're in the centre, so it's fine.
 
-                if (Transform.Y + Transform.Ht <= minAndMaxY[0]) {
+                if (Transform.Y + Transform.Ht <= minAndMaxY[0])
+                {
                     return true;
                 }
 
@@ -176,16 +182,18 @@ namespace ManicMiner
 
         public void onCollisionEnter(PhysicsBody x)
         {
-            if (x.Parent.checkTag ("Collectible")) {
+            if (x.Parent.checkTag("Collectible"))
+            {
                 return;
             }
 
-            if (fallCounter > 2) {
-                ToBeDestroyed = true;
+            if (fallCounter > 2)
+            {
+                // ToBeDestroyed = true;
             }
-            
+
             fallCounter = 0;
- 
+
             if (shouldReset(x))
             {
                 fall = true;
@@ -204,7 +212,7 @@ namespace ManicMiner
                 return;
             }
 
-            Debug.Log ("Falling: " + fall);
+            Debug.Log("Falling: " + fall);
             canJump = false;
             fall = true;
 
