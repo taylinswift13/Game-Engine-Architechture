@@ -19,7 +19,7 @@ namespace GameAssignment
             right = false;
 
             this.Transform.X = 50.0f;
-            this.Transform.Y = 100.0f;
+            this.Transform.Y = 400.0f;
             this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("player_idle1.png");
             this.Transform.Scalex = 3;
             this.Transform.Scaley = 3;
@@ -34,11 +34,10 @@ namespace GameAssignment
             right = false;
 
             setPhysicsEnabled();
-
-            MyBody.Mass = 1000;
-            MyBody.MaxForce = 20;
-            MyBody.Drag = 0.3f;
+            MyBody.Mass = 1;
             MyBody.UsesGravity = true;
+            MyBody.StopOnCollision = true;
+            //MyBody.addRectCollider((int)Transform.X, (int)Transform.Y + 1, 22, 23);
             MyBody.addRectCollider();
 
             wid = Bootstrap.getDisplay().getWidth();
@@ -90,12 +89,12 @@ namespace GameAssignment
             double boundsx;
             if (left)
             {
-                MyBody.addForce(this.Transform.Forward, -1 * 500f);
+                this.Transform.translate(-5, 0);
             }
 
             if (right)
             {
-                MyBody.addForce(this.Transform.Forward, 500);
+                this.Transform.translate(5, 0);
             }
 
             if (this.Transform.X < 0)
@@ -142,12 +141,7 @@ namespace GameAssignment
 
         public void onCollisionEnter(PhysicsBody x)
         {
-            Health -= 1;
 
-            if (Health <= 0)
-            {
-                this.ToBeDestroyed = true;
-            }
         }
 
         public void onCollisionExit(PhysicsBody x)
@@ -157,6 +151,7 @@ namespace GameAssignment
 
         public void onCollisionStay(PhysicsBody x)
         {
+            // MyBody.stopForces();
         }
 
         public override string ToString()

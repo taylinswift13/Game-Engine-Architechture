@@ -23,6 +23,8 @@ namespace Shard
             Bootstrap.getSound().initializeAudioSystem();
             Bootstrap.getSound().playSound("fire.wav", 0.1f, true);
             Player player = new Player();
+            Platform grass1 = new Platform(0, 500);
+            Platform grass2 = new Platform(600, 450);
         }
 
         public override int getTargetFrameRate()
