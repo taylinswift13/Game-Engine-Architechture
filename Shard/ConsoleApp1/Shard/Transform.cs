@@ -29,7 +29,8 @@ namespace Shard
         private string spritePath;
         private Vector2 forward;
         private Vector2 right, centre;
-        private bool flip;
+        private bool flipHorizontal;
+        private bool flipVertical;
 
         public Vector2 getLastDirection()
         {
@@ -46,7 +47,8 @@ namespace Shard
             forward = new Vector2();
             right = new Vector2();
             centre = new Vector2();
-            flip = false;
+            flipHorizontal = false;
+            flipVertical = false;
 
             scalex = 1.0f;
             scaley = 1.0f;
@@ -149,7 +151,8 @@ namespace Shard
         internal GameObject Owner { get => owner; set => owner = value; }
         public ref Vector2 Centre { get => ref centre; }
         public float Scalex { get => scalex; set => scalex = value; }
-        public bool Flip { get => flip; set => flip = value; }
+        public bool FlipHorizontal { get => flipHorizontal; set => flipHorizontal = value; }
+        public bool FlipVertical { get => flipVertical; set => flipVertical = value; }
         public float Scaley { get => scaley; set => scaley = value; }
         public float Lx { get => lx; set => lx = value; }
         public float Ly { get => ly; set => ly = value; }

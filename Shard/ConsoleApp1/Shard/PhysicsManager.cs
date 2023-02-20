@@ -127,7 +127,7 @@ namespace Shard
             }
             else
             {
-                gravityModifier = 0.1f;
+                gravityModifier = 10f;
             }
 
             if (Bootstrap.checkEnvironmentalVariable("gravity_dir"))
@@ -302,7 +302,7 @@ namespace Shard
                 body.physicsTick();
                 if (body.UsesGravity)
                 {
-                    body.applyGravity(gravityModifier, gravityDir);
+                    body.applyGravity(gravityModifier, new Vector2(0, Bootstrap.gravityDir));
                 }
 
 

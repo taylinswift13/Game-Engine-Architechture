@@ -51,7 +51,7 @@ namespace GameAssignment
 
         public void onCollisionStay(PhysicsBody x)
         {
-
+            MyBody.stopForces();
         }
 
         public override string ToString()

@@ -39,7 +39,8 @@ namespace Shard
             //sound2Channel = sm.playSound(fire, 0.7f, false);
             Player player = new Player();
             Platform grass1 = new Platform(0, 500);
-            Platform grass2 = new Platform(600, 450);
+            Platform grass2 = new Platform(450, 450);
+            Platform grass3 = new Platform(150, 200);
         }
 
         public override int getTargetFrameRate()

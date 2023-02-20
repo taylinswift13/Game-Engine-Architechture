@@ -233,7 +233,8 @@ namespace Shard
                 tRect.h = sRect.h;
 
                 SDL.SDL_RendererFlip flip;
-                if (trans.Flip) { flip = SDL.SDL_RendererFlip.SDL_FLIP_HORIZONTAL; }
+                if (trans.FlipHorizontal) { flip = SDL.SDL_RendererFlip.SDL_FLIP_HORIZONTAL; }
+                else if (trans.FlipVertical) { flip = SDL.SDL_RendererFlip.SDL_FLIP_VERTICAL; }
                 else { flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE; }
 
                 SDL.SDL_RenderCopyEx(_rend, sprite, ref sRect, ref tRect, (int)trans.Rotz, IntPtr.Zero, flip);
