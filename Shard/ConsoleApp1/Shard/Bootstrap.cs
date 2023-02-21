@@ -19,8 +19,8 @@ namespace Shard
         public static string DEFAULT_CONFIG = "config.cfg";
         public static int gravityDir = 1;
         public static Vector2 playerPos;
-        public static Vector2 Position;
-        public static Vector2 Size;
+        public static Vector2 camPos;
+        public static Vector2 camSize;
 
         private static Game runningGame;
         private static Display displayEngine;

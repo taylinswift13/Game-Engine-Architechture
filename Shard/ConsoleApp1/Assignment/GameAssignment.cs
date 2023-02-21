@@ -34,7 +34,7 @@ namespace Shard
             player = new Player();
             camera = new Camera()
             {
-                Size = new Vector2(1080, 720)
+                Size = new Vector2(100, 100)
             };
         }
 
@@ -49,7 +49,7 @@ namespace Shard
             //sound2Status = sm.getSoundStatus(sound2Channel);
             //Console.WriteLine("Sound 2 status: " + sound2Status);
 
-            camera.FollowGameObject(player);
+            camera.FollowGameObject(Bootstrap.playerPos);
             Console.WriteLine("camera: " + camera.Position.X + " " + camera.Position.Y);
             Console.WriteLine("player: " + player.Transform.X + " " + player.Transform.Y);
         }
