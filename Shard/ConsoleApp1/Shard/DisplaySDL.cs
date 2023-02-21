@@ -14,6 +14,8 @@
 using SDL2;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Numerics;
 using System.Threading;
 
 namespace Shard
@@ -227,8 +229,8 @@ namespace Shard
                 sRect.w = (int)(trans.Wid * trans.Scalex);
                 sRect.h = (int)(trans.Ht * trans.Scaley);
 
-                tRect.x = (int)trans.X;
-                tRect.y = (int)trans.Y;
+                tRect.x = (int)trans.X - (int)Bootstrap.camPos.X;
+                tRect.y = (int)trans.Y - (int)Bootstrap.camPos.Y;
                 tRect.w = sRect.w;
                 tRect.h = sRect.h;
 

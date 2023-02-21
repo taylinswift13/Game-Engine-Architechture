@@ -34,7 +34,7 @@ namespace Shard
             player = new Player();
             camera = new Camera()
             {
-                Size = new Vector2(100, 100)
+                Size = new Vector2(Bootstrap.getDisplay().getWidth(), Bootstrap.getDisplay().getHeight())
             };
         }
 
