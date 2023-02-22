@@ -3,7 +3,7 @@ using Shard;
 
 namespace GameAssignment
 {
-    class Platform : GameObject, InputListener, CollisionHandler
+    class Bush : GameObject, InputListener, CollisionHandler
     {
         private int health;
 
@@ -15,13 +15,14 @@ namespace GameAssignment
 
             MyBody.Mass = 1;
             MyBody.Kinematic = true;
-
+            this.Transform.Scalex = 2;
+            this.Transform.Scaley = 2;
             MyBody.addRectCollider();
 
-            addTag("Platform");
+            addTag("Bush");
 
         }
-        public Platform(int x, int y)
+        public Bush(int x, int y)
         {
             this.Transform.X = x;
             this.Transform.Y = y;
@@ -35,7 +36,7 @@ namespace GameAssignment
 
         public override void update()
         {
-            this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("grass.png");
+            this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("bush.png");
             Bootstrap.getDisplay().addToDraw(this);
         }
 
@@ -56,7 +57,7 @@ namespace GameAssignment
 
         public override string ToString()
         {
-            return "Platform: [" + Transform.X + ", " + Transform.Y + ", " + Transform.Wid + ", " + Transform.Ht + "]";
+            return "Bush: [" + Transform.X + ", " + Transform.Y + ", " + Transform.Wid + ", " + Transform.Ht + "]";
         }
 
     }

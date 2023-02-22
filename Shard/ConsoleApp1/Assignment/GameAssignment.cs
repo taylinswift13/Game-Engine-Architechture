@@ -25,12 +25,13 @@ namespace Shard
         public override void initialize()
         {
             sm.initializeAudioSystem();
-            sound1Channel = sm.playSound(BGM, 0.5f, true);
+            // sound1Channel = sm.playSound(BGM, 0.5f, true);
             //sound2Channel = sm.playSound(fire, 0.7f, false);
-            
+
             Platform grass1 = new Platform(0, 500);
             Platform grass2 = new Platform(450, 450);
             Platform grass3 = new Platform(150, 200);
+            Bush bush = new Bush(600, 402);
             player = new Player();
             camera = new Camera()
             {
