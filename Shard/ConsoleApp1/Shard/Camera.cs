@@ -15,8 +15,23 @@ namespace Shard
             Position.Y = objPos.Y - (Size.Y / 2);
 
             // Clamp the camera's position to the game world
-            Position.X = Math.Max(0, Math.Min(Position.X, Bootstrap.getDisplay().getWidth() - Size.X));
-            Position.Y = Math.Max(0, Math.Min(Position.Y, Bootstrap.getDisplay().getHeight() - Size.Y));
+            if (Position.X < 0)
+            {
+                Position.X = 0;
+            }
+            else if (Position.X > Bootstrap.getDisplay().getWidth() - Size.X)
+            {
+                Position.X = Bootstrap.getDisplay().getWidth() - Size.X;
+            }
+
+            if (Position.Y < 0)
+            {
+                Position.Y = 0;
+            }
+            else if (Position.Y > Bootstrap.getDisplay().getHeight() - Size.Y)
+            {
+                Position.Y = Bootstrap.getDisplay().getHeight() - Size.Y;
+            }
 
             Bootstrap.camPos = Position;
             Bootstrap.camSize = Size;
