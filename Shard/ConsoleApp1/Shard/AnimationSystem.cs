@@ -10,11 +10,12 @@ namespace Shard
 {
     class AnimationSystem
     {
+        public bool isPlaying;
         int counter;
         int index;
         List<string> animation = new List<string>();
 
-        public void playAnimation(int frames, int duration, Transform trans)
+        public void playAnimation(int duration, Transform trans)
         {
             if (animation.Count <= 1) return;
 
@@ -28,6 +29,7 @@ namespace Shard
 
             if (index > animation.Count - 1) return;
             else trans.SpritePath = Bootstrap.getAssetManager().getAssetPath(animation[index]);
+            isPlaying = true;
         }
 
         public void loadAnimation(string fileName, int frames)
@@ -36,6 +38,19 @@ namespace Shard
             {
                 string frame = fileName + i + ".png";
                 animation.Add(frame);
+            }
+        }
+
+        public void PlayAnimationOnce(int duration, Transform trans)
+        {
+            int index_once = 0;
+            for (int counter = 0; counter < animation.Count * duration; counter++)
+            {
+                if (counter % duration == 0)
+                {
+                    trans.SpritePath = Bootstrap.getAssetManager().getAssetPath(animation[index_once]);
+                    index_once++;
+                }
             }
         }
     }

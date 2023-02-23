@@ -8,15 +8,15 @@ namespace GameAssignment
 {
     class Player : GameObject, InputListener, CollisionHandler
     {
-        private int health;
+        int health, wid;
         bool left, right, jumpUp, isJumping;
-        double jumpCount, jumpSpeed = 260;
-        int wid;
-        AnimationSystem idle;
+        double jumpCount, jumpSpeed = 350;
+        AnimationSystem idleAni;
+        AnimationSystem runAni;
+        AnimationSystem hurtAni;
+        AnimationSystem jumpAni;
 
         public int Health { get => health; set => health = value; }
-        List<string> idleAnimationClip = new List<string>();
-        List<string> runAnimationClip = new List<string>();
         public override void initialize()
         {
             left = false;
@@ -30,25 +30,23 @@ namespace GameAssignment
             this.Transform.Scalex = 3;
             this.Transform.Scaley = 3;
 
-            //animation test
-
-            loadAnimation("player_idle", 4, idleAnimationClip);
-            loadAnimation("player_run", 6, runAnimationClip);
-            //idle.loadAnimation("player_idle", 4);
-
-            Bootstrap.getInput().addListener(this);
-
-            left = false;
-            right = false;
+            idleAni = new AnimationSystem();
+            idleAni.loadAnimation("player_idle", 4);
+            runAni = new AnimationSystem();
+            runAni.loadAnimation("player_run", 6);
+            hurtAni = new AnimationSystem();
+            hurtAni.loadAnimation("player_hurt", 2);
+            jumpAni = new AnimationSystem();
+            jumpAni.loadAnimation("player_jump", 2);
 
             setPhysicsEnabled();
             MyBody.Mass = 1;
             MyBody.UsesGravity = true;
             MyBody.StopOnCollision = true;
-            //MyBody.addRectCollider((int)Transform.X, (int)Transform.Y + 1, 22, 23);
             MyBody.addRectCollider();
 
             wid = Bootstrap.getDisplay().getWidth();
+            Bootstrap.getInput().addListener(this);
         }
 
         public void handleInput(InputEvent inp, string eventType)
@@ -95,16 +93,18 @@ namespace GameAssignment
             }
         }
 
-
         public override void update()
         {
-            //idle.playAnimation(4, 5, this.Transform);
             Bootstrap.playerPos = new Vector2(this.Transform.X, this.Transform.Y);
             Bootstrap.getDisplay().addToDraw(this);
             Bootstrap.getDisplay().showText("SPACE to jump", 10, 10, 20, System.Drawing.Color.White);
             Bootstrap.getDisplay().showText("E to inverse gravity", 10, 35, 20, System.Drawing.Color.White);
-            if (right || left) playAnimation(runAnimationClip, 7);
-            else playAnimation(idleAnimationClip, 10);
+            if (!isJumping)
+            {
+                if (right || left) runAni.playAnimation(5, this.Transform);
+                else idleAni.playAnimation(8, this.Transform);
+            }
+
 
             if (jumpUp)
             {
@@ -148,33 +148,6 @@ namespace GameAssignment
             }
 
             Bootstrap.getDisplay().addToDraw(this);
-        }
-
-
-        public void loadAnimation(string fileName, int frames, List<string> animation)
-        {
-            for (int i = 1; i <= frames; i++)
-            {
-                string frame = fileName + i + ".png";
-                animation.Add(frame);
-            }
-        }
-        //how to make these two variable inside the function?
-        int index = 0; int counter = 0;
-        public void playAnimation(List<string> animationClip, int duration)
-        {
-            if (animationClip.Count <= 1) return;
-
-            counter++;
-            if (counter % duration == 0)
-            {
-                counter = 0;
-                if (index <= animationClip.Count - 1) { index++; }
-            }
-            if (index == animationClip.Count) { index = 0; }
-
-            if (index > animationClip.Count - 1) return;
-            else this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath(animationClip[index]);
         }
 
         public void onCollisionEnter(PhysicsBody x)
