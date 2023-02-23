@@ -208,7 +208,6 @@ namespace Shard
 
         public override void display()
         {
-
             SDL.SDL_Rect sRect;
             SDL.SDL_Rect tRect;
 
@@ -227,15 +226,12 @@ namespace Shard
                 sRect.w = (int)(trans.Wid * trans.Scalex);
                 sRect.h = (int)(trans.Ht * trans.Scaley);
 
+                tRect.x = (int)(trans.X - Bootstrap.camPos.X);
+                tRect.y = (int)(trans.Y - Bootstrap.camPos.Y);
                 //tRect.x = (int)trans.X;
                 //tRect.y = (int)trans.Y;
-                //tRect.w = sRect.w;
-                //tRect.h = sRect.h;
-                tRect.x = (int)(trans.X - (int)Bootstrap.camPos.X);
-                tRect.y = (int)(trans.Y - (int)Bootstrap.camPos.Y);
-                tRect.w = (int)(sRect.w / (int)Bootstrap.camSize.X);
-                tRect.h = (int)(sRect.h / (int)Bootstrap.camSize.Y);
-
+                tRect.w = sRect.w;
+                tRect.h = sRect.h;
 
                 SDL.SDL_RendererFlip flip;
                 if (trans.FlipHorizontal) { flip = SDL.SDL_RendererFlip.SDL_FLIP_HORIZONTAL; }
@@ -259,8 +255,6 @@ namespace Shard
 
             // Show it off.
             base.display();
-
-
         }
 
         public override void clearDisplay()

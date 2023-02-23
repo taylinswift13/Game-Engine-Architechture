@@ -90,7 +90,7 @@ namespace Shard
         {
             foreach (Collider col in myColliders)
             {
-                col.drawMe(DebugColor);
+                //col.drawMe(DebugColor);
             }
         }
 

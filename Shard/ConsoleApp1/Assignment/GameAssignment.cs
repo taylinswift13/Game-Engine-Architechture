@@ -51,7 +51,7 @@ namespace Shard
 
             camera.FollowGameObject(Bootstrap.playerPos);
             Console.WriteLine("camera: " + camera.Position.X + " " + camera.Position.Y);
-            Console.WriteLine("player: " + player.Transform.X + " " + player.Transform.Y);
+            //Console.WriteLine("player: " + player.Transform.X + " " + player.Transform.Y);
         }
 
         public override int getTargetFrameRate()

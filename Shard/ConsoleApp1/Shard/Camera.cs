@@ -19,18 +19,18 @@ namespace Shard
             {
                 Position.X = 0;
             }
-            else if (Position.X > Bootstrap.getDisplay().getWidth() - Size.X)
+            else if (Position.X > Size.X)
             {
-                Position.X = Bootstrap.getDisplay().getWidth() - Size.X;
+                Position.X = Size.X;
             }
 
             if (Position.Y < 0)
             {
                 Position.Y = 0;
             }
-            else if (Position.Y > Bootstrap.getDisplay().getHeight() - Size.Y)
+            else if (Position.Y > Size.Y)
             {
-                Position.Y = Bootstrap.getDisplay().getHeight() - Size.Y;
+                Position.Y = Size.Y;
             }
 
             Bootstrap.camPos = Position;
