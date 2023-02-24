@@ -155,6 +155,7 @@ namespace GameAssignment
 
         public void onCollisionEnter(PhysicsBody x)
         {
+            jumpUp = false;
             inTheAir = false;
             stopForce = true;
         }

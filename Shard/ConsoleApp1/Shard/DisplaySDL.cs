@@ -223,11 +223,11 @@ namespace Shard
 
                 sRect.x = 0;
                 sRect.y = 0;
-                sRect.w = (int)(trans.Wid * trans.Scalex);
-                sRect.h = (int)(trans.Ht * trans.Scaley);
+                sRect.w = (int)(trans.Wid * trans.Scalex * Bootstrap.CamViewScale);
+                sRect.h = (int)(trans.Ht * trans.Scaley * Bootstrap.CamViewScale);
 
-                tRect.x = (int)(trans.X - Bootstrap.camPos.X);
-                tRect.y = (int)(trans.Y - Bootstrap.camPos.Y);
+                tRect.x = (int)(trans.X - Bootstrap.camPos.X) * Bootstrap.CamViewScale;
+                tRect.y = (int)(trans.Y - Bootstrap.camPos.Y) * Bootstrap.CamViewScale;
                 //tRect.x = (int)trans.X;
                 //tRect.y = (int)trans.Y;
                 tRect.w = sRect.w;

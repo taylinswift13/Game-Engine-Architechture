@@ -12,6 +12,7 @@ namespace Shard
     {
         Camera camera;
         Player player;
+        Random rand;
         //GameObject top, left, right, bottom;
         //Random rand;
 
@@ -21,6 +22,7 @@ namespace Shard
         SoundStatus sound1Status, sound2Status;
         string BGM = "sparks fly.wav";
         string fire = "fire.wav";
+        List<Platform> platform;
 
         public override void initialize()
         {
@@ -28,10 +30,16 @@ namespace Shard
             // sound1Channel = sm.playSound(BGM, 0.5f, true);
             //sound2Channel = sm.playSound(fire, 0.7f, false);
 
+            rand = new Random();
+            platform = new List<Platform>();
             Platform grass1 = new Platform(0, 150, 3);
             Platform grass2 = new Platform(250, 150, 2);
             Platform grass3 = new Platform(80, 0, 1);
             Platform grass4 = new Platform(100, 100, 1);
+            for (int i = 0; i < 10; i++)
+            {
+                platform.Add(new Platform(rand.Next(0, 10) * 100, rand.Next(0, 10) * 100, rand.Next(1, 3)));
+            }
             Bush bush = new Bush(600, 402);
             player = new Player();
             camera = new Camera()
@@ -51,7 +59,7 @@ namespace Shard
             //sound2Status = sm.getSoundStatus(sound2Channel);
             //Console.WriteLine("Sound 2 status: " + sound2Status);
 
-            camera.FollowGameObject(Bootstrap.playerPos);
+            camera.FollowGameObject(Bootstrap.playerPos, 0.1f);
             Console.WriteLine("camera: " + camera.Position.X + " " + camera.Position.Y);
             //Console.WriteLine("player: " + player.Transform.X + " " + player.Transform.Y);
         }

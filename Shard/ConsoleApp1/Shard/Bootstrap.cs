@@ -21,6 +21,7 @@ namespace Shard
         public static Vector2 playerPos;
         public static Vector2 camPos;
         public static Vector2 camSize;
+        private static int camViewScale = 2;
 
         private static Game runningGame;
         private static Display displayEngine;
@@ -57,6 +58,7 @@ namespace Shard
 
 
         public static double TimeElapsed { get => timeElapsed; set => timeElapsed = value; }
+        public static int CamViewScale { get => camViewScale; set => camViewScale = value; }
 
         public static string getBaseDir()
         {
