@@ -9,7 +9,7 @@ namespace GameAssignment
     class Player : GameObject, InputListener, CollisionHandler
     {
         int health, wid;
-        bool left, right, jumpUp, isJumping;
+        bool left, right, jumpUp, inTheAir, stopForce;
         double jumpCount, jumpSpeed = 350;
         AnimationSystem idleAni;
         AnimationSystem runAni;
@@ -22,13 +22,14 @@ namespace GameAssignment
             left = false;
             right = false;
             jumpUp = false;
-            isJumping = false;
+            inTheAir = false;
+            stopForce = false;
 
-            this.Transform.X = 50.0f;
-            this.Transform.Y = 400.0f;
+            this.Transform.X = 0.0f;
+            this.Transform.Y = 0.0f;
             this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("player_idle1.png");
-            this.Transform.Scalex = 3;
-            this.Transform.Scaley = 3;
+            this.Transform.Scalex = 2;
+            this.Transform.Scaley = 2;
 
             idleAni = new AnimationSystem();
             idleAni.loadAnimation("player_idle", 4);
@@ -65,17 +66,18 @@ namespace GameAssignment
                     this.Transform.FlipHorizontal = true;
                 }
 
-                if (inp.Key == (int)SDL.SDL_Scancode.SDL_SCANCODE_SPACE && !isJumping)
+                if (inp.Key == (int)SDL.SDL_Scancode.SDL_SCANCODE_SPACE && !inTheAir)
                 {
                     jumpUp = true;
                 }
 
                 //inverse gravity
-                if (inp.Key == (int)SDL.SDL_Scancode.SDL_SCANCODE_E)
+                if (inp.Key == (int)SDL.SDL_Scancode.SDL_SCANCODE_E && !inTheAir)
                 {
                     Bootstrap.gravityDir = -Bootstrap.gravityDir;
                     if (!Transform.FlipVertical) Transform.FlipVertical = true;
                     else Transform.FlipVertical = false;
+                    inTheAir = true;
                 }
 
             }
@@ -97,9 +99,7 @@ namespace GameAssignment
         {
             Bootstrap.playerPos = new Vector2(this.Transform.X, this.Transform.Y);
             Bootstrap.getDisplay().addToDraw(this);
-            Bootstrap.getDisplay().showText("SPACE to jump", 10, 10, 20, System.Drawing.Color.White);
-            Bootstrap.getDisplay().showText("E to inverse gravity", 10, 35, 20, System.Drawing.Color.White);
-            if (!isJumping)
+            if (!inTheAir)
             {
                 if (right || left) runAni.playAnimation(5, this.Transform);
                 else idleAni.playAnimation(8, this.Transform);
@@ -112,7 +112,7 @@ namespace GameAssignment
                 {
                     this.Transform.translate(0, -Bootstrap.gravityDir * jumpSpeed * Bootstrap.getDeltaTime());
                     jumpCount += Bootstrap.getDeltaTime();
-                    isJumping = true;
+                    inTheAir = true;
                 }
                 else
                 {
@@ -124,27 +124,30 @@ namespace GameAssignment
 
         public override void physicsUpdate()
         {
-            double boundsx;
-            if (left)
+            if (!stopForce)
             {
-                this.Transform.translate(-5, 0);
-            }
+                double boundsx;
+                if (left)
+                {
+                    this.Transform.translate(-5, 0);
+                }
 
-            if (right)
-            {
-                this.Transform.translate(5, 0);
-            }
+                if (right)
+                {
+                    this.Transform.translate(5, 0);
+                }
 
-            if (this.Transform.X < 0)
-            {
-                this.Transform.translate(-1 * Transform.X, 0);
-            }
+                if (this.Transform.X < 0)
+                {
+                    this.Transform.translate(-1 * Transform.X, 0);
+                }
 
-            boundsx = wid - (this.Transform.X + this.Transform.Wid);
+                boundsx = wid - (this.Transform.X + this.Transform.Wid);
 
-            if (boundsx < 0)
-            {
-                this.Transform.translate(boundsx, 0);
+                if (boundsx < 0)
+                {
+                    this.Transform.translate(boundsx, 0);
+                }
             }
 
             Bootstrap.getDisplay().addToDraw(this);
@@ -152,17 +155,18 @@ namespace GameAssignment
 
         public void onCollisionEnter(PhysicsBody x)
         {
-            isJumping = false;
+            inTheAir = false;
+            stopForce = true;
         }
 
         public void onCollisionExit(PhysicsBody x)
         {
+            stopForce = false;
         }
 
         public void onCollisionStay(PhysicsBody x)
         {
 
-            MyBody.stopForces();
         }
 
         public override string ToString()

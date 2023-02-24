@@ -28,9 +28,10 @@ namespace Shard
             // sound1Channel = sm.playSound(BGM, 0.5f, true);
             //sound2Channel = sm.playSound(fire, 0.7f, false);
 
-            Platform grass1 = new Platform(0, 500);
-            Platform grass2 = new Platform(450, 450);
-            Platform grass3 = new Platform(150, 200);
+            Platform grass1 = new Platform(0, 150, 3);
+            Platform grass2 = new Platform(250, 150, 2);
+            Platform grass3 = new Platform(80, 0, 1);
+            Platform grass4 = new Platform(100, 100, 1);
             Bush bush = new Bush(600, 402);
             player = new Player();
             camera = new Camera()
