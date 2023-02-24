@@ -8,18 +8,33 @@ namespace Shard
         public Vector2 Position;
         public Vector2 Size;
 
-        public void FollowGameObject(GameObject gameObject)
+        public void FollowGameObject(Vector2 objPos)
         {
             // Set the camera position to be centered on the game object
-            Position.X = gameObject.Transform.X - (Size.X / 2);
-            Position.Y = gameObject.Transform.Y - (Size.Y / 2);
+            Position.X = objPos.X - (Size.X / 2);
+            Position.Y = objPos.Y - (Size.Y / 2);
 
             // Clamp the camera's position to the game world
-            Position.X = Math.Max(0, Math.Min(Position.X, Bootstrap.getDisplay().getWidth() - Size.X));
-            Position.Y = Math.Max(0, Math.Min(Position.Y, Bootstrap.getDisplay().getHeight() - Size.Y));
+            if (Position.X < 0)
+            {
+                Position.X = 0;
+            }
+            else if (Position.X > Size.X)
+            {
+                Position.X = Size.X;
+            }
 
-            Bootstrap.Position = Position;
-            Bootstrap.Size = Size;
+            if (Position.Y < 0)
+            {
+                Position.Y = 0;
+            }
+            else if (Position.Y > Size.Y)
+            {
+                Position.Y = Size.Y;
+            }
+
+            Bootstrap.camPos = Position;
+            Bootstrap.camSize = Size;
         }
     }
 }

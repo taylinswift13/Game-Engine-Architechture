@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+using System.Numerics;
 using Shard;
 
 namespace GameAssignment
@@ -6,6 +7,8 @@ namespace GameAssignment
     class Platform : GameObject, InputListener, CollisionHandler
     {
         private int health;
+        Vector2 TilePos;
+
         int type;
         public int Health { get => health; set => health = value; }
 
@@ -25,6 +28,9 @@ namespace GameAssignment
         }
         public Platform(int x, int y, int type)
         {
+            TilePos.X = x;
+            TilePos.Y = y;
+
             this.Transform.X = x;
             this.Transform.Y = y;
             this.type = type;
@@ -38,8 +44,13 @@ namespace GameAssignment
 
         public override void update()
         {
+            //this.Transform.X = TilePos.X - Bootstrap.camPos.X;
+            //this.Transform.Y = TilePos.Y - Bootstrap.camPos.Y;
+
+            this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("grass.png");
             this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("grass" + type + ".png");
             Bootstrap.getDisplay().addToDraw(this);
+            Console.WriteLine("platform: " + this.Transform.X + " " + this.Transform.Y);
         }
 
         public void onCollisionEnter(PhysicsBody x)

@@ -14,6 +14,8 @@
 using SDL2;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Numerics;
 using System.Threading;
 
 namespace Shard
@@ -206,11 +208,8 @@ namespace Shard
 
         public override void display()
         {
-
             SDL.SDL_Rect sRect;
             SDL.SDL_Rect tRect;
-
-
 
             foreach (Transform trans in _toDraw)
             {
@@ -227,8 +226,10 @@ namespace Shard
                 sRect.w = (int)(trans.Wid * trans.Scalex);
                 sRect.h = (int)(trans.Ht * trans.Scaley);
 
-                tRect.x = (int)trans.X;
-                tRect.y = (int)trans.Y;
+                tRect.x = (int)(trans.X - Bootstrap.camPos.X);
+                tRect.y = (int)(trans.Y - Bootstrap.camPos.Y);
+                //tRect.x = (int)trans.X;
+                //tRect.y = (int)trans.Y;
                 tRect.w = sRect.w;
                 tRect.h = sRect.h;
 
@@ -255,8 +256,6 @@ namespace Shard
 
             // Show it off.
             base.display();
-
-
         }
 
         public override void clearDisplay()
