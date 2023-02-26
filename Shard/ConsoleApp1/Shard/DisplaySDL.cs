@@ -233,6 +233,14 @@ namespace Shard
                 tRect.w = sRect.w;
                 tRect.h = sRect.h;
 
+                if (trans.SpritePath == Bootstrap.getAssetManager().getAssetPath("backdrop.jpg"))
+                {
+                    sRect.w = trans.Wid;
+                    sRect.h = trans.Ht;
+                    tRect.w = sRect.w;
+                    tRect.h = sRect.h;
+                }
+
                 SDL.SDL_RendererFlip flip;
                 if (trans.FlipHorizontal && trans.FlipVertical) { flip = SDL.SDL_RendererFlip.SDL_FLIP_HORIZONTAL | SDL.SDL_RendererFlip.SDL_FLIP_VERTICAL; }
                 else if (trans.FlipHorizontal) { flip = SDL.SDL_RendererFlip.SDL_FLIP_HORIZONTAL; }

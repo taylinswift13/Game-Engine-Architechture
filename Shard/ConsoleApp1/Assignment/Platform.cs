@@ -47,10 +47,10 @@ namespace GameAssignment
             //this.Transform.X = TilePos.X - Bootstrap.camPos.X;
             //this.Transform.Y = TilePos.Y - Bootstrap.camPos.Y;
 
-            this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("grass.png");
+            //this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("grass.png");
             this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("grass" + type + ".png");
             Bootstrap.getDisplay().addToDraw(this);
-            Console.WriteLine("platform: " + this.Transform.X + " " + this.Transform.Y);
+            //Console.WriteLine("platform: " + this.Transform.X + " " + this.Transform.Y);
         }
 
         public void onCollisionEnter(PhysicsBody x)

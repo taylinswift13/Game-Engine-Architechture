@@ -43,8 +43,6 @@ namespace GameTest
             MyBody.addRectCollider();
 
             addTag("Spaceship");
-
-
         }
 
         public void fireBullet()
