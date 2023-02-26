@@ -13,6 +13,7 @@ namespace Shard
         Camera camera;
         Player player;
         Random rand;
+        GameObject background;
         //GameObject top, left, right, bottom;
         //Random rand;
 
@@ -29,6 +30,11 @@ namespace Shard
             sm.initializeAudioSystem();
             // sound1Channel = sm.playSound(BGM, 0.5f, true);
             //sound2Channel = sm.playSound(fire, 0.7f, false);
+
+            background = new GameObject();
+            background.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("backdrop.jpg");
+            background.addTag("bg");
+
 
             rand = new Random();
             platform = new List<Platform>();
@@ -50,6 +56,10 @@ namespace Shard
 
         public override void update()
         {
+            background.Transform.X = Bootstrap.camPos.X;
+            background.Transform.Y = Bootstrap.camPos.Y;
+            Bootstrap.getDisplay().addToDraw(background);
+
             //Bootstrap.getDisplay().showText("FPS: " + Bootstrap.getSecondFPS() + " / " + 
             //                                 Bootstrap.getFPS(), 10, 10, 12, 255, 255, 255);
 
