@@ -55,13 +55,13 @@ namespace Shard
 
             if (fromTrans)
             {
-                Wid = (float)(MyRect.Wid * MyRect.Scalex);
-                Ht = (float)(MyRect.Ht * MyRect.Scaley);
+                Wid = (float)(MyRect.Wid * MyRect.Scalex * Bootstrap.CamViewScale);
+                Ht = (float)(MyRect.Ht * MyRect.Scaley * Bootstrap.CamViewScale);
             }
             else
             {
-                Wid = (float)(BaseWid * MyRect.Scalex);
-                Ht = (float)(BaseHt * MyRect.Scaley);
+                Wid = (float)(BaseWid * MyRect.Scalex * Bootstrap.CamViewScale);
+                Ht = (float)(BaseHt * MyRect.Scaley * Bootstrap.CamViewScale);
             }
 
             angle = (float)(Math.PI * MyRect.Rotz / 180.0f);
@@ -74,13 +74,14 @@ namespace Shard
             nwid = (float)(Math.Abs(Wid * cos) + Math.Abs(Ht * sin));
             nht = (float)(Math.Abs(Wid * sin) + Math.Abs(Ht * cos));
 
-            X = (float)MyRect.X + (Wid / 2);
-            Y = (float)MyRect.Y + (Ht / 2);
+            X = ((float)MyRect.X) * Bootstrap.CamViewScale + (Wid / 2);
+            Y = ((float)MyRect.Y) * Bootstrap.CamViewScale + (Ht / 2);
 
             Wid = nwid;
             Ht = nht;
 
-            if (RotateAtOffset) {
+            if (RotateAtOffset)
+            {
                 // Now we work out the X and Y based on the rotation of the body to 
                 // which this belongs,.
                 x1 = X - MyRect.Centre.X;

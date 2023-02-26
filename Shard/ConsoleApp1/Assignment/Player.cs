@@ -9,7 +9,7 @@ namespace GameAssignment
     class Player : GameObject, InputListener, CollisionHandler
     {
         int health, wid;
-        bool left, right, jumpUp, inTheAir, stopForce;
+        bool left, right, jumpUp, inTheAir, stopForce, isHurt;
         double jumpCount, jumpSpeed = 350;
         AnimationSystem idleAni;
         AnimationSystem runAni;
@@ -24,6 +24,7 @@ namespace GameAssignment
             jumpUp = false;
             inTheAir = false;
             stopForce = false;
+            isHurt = false;
 
             this.Transform.X = 0.0f;
             this.Transform.Y = 0.0f;
@@ -48,6 +49,7 @@ namespace GameAssignment
 
             wid = Bootstrap.getDisplay().getWidth();
             Bootstrap.getInput().addListener(this);
+            addTag("Player");
         }
 
         public void handleInput(InputEvent inp, string eventType)
@@ -101,8 +103,8 @@ namespace GameAssignment
             Bootstrap.getDisplay().addToDraw(this);
             if (!inTheAir)
             {
-                if (right || left) runAni.playAnimation(5, this.Transform);
-                else idleAni.playAnimation(8, this.Transform);
+                if (right || left) runAni.playAnimation(8, this.Transform);
+                else idleAni.playAnimation(10, this.Transform);
             }
 
 
@@ -120,6 +122,20 @@ namespace GameAssignment
                     jumpUp = false;
                 }
             }
+            if (isHurt)
+            {
+                if (hurtAni.isPlaying)
+                {
+                    hurtAni.PlayAnimationOnce(30, this.Transform);
+                }
+                else
+                {
+                    isHurt = false;
+                    runAni.StartAnimation();
+                    idleAni.StartAnimation();
+                }
+            }
+
         }
 
         public override void physicsUpdate()
@@ -136,33 +152,39 @@ namespace GameAssignment
                 {
                     this.Transform.translate(5, 0);
                 }
-
-                if (this.Transform.X < 0)
-                {
-                    this.Transform.translate(-1 * Transform.X, 0);
-                }
-
-                boundsx = wid - (this.Transform.X + this.Transform.Wid);
-
-                if (boundsx < 0)
-                {
-                    this.Transform.translate(boundsx, 0);
-                }
             }
 
             Bootstrap.getDisplay().addToDraw(this);
         }
 
-        public void onCollisionEnter(PhysicsBody x)
+        public void onCollisionEnter(PhysicsBody other)
         {
-            jumpUp = false;
-            inTheAir = false;
-            stopForce = true;
+            if (other.Parent.checkTag("Platform"))
+            {
+                jumpUp = false;
+                inTheAir = false;
+                stopForce = true;
+            }
+            if (other.Parent.checkTag("Bush"))
+            {
+                jumpUp = false;
+                inTheAir = false;
+                stopForce = true;
+                health--;
+                runAni.StopAnimation();
+                idleAni.StopAnimation();
+                isHurt = true;            
+            }
         }
 
-        public void onCollisionExit(PhysicsBody x)
+        public void onCollisionExit(PhysicsBody other)
         {
-            stopForce = false;
+            if (other == null) return;
+            if (other.Parent.checkTag("Platform"))
+            {
+                stopForce = false;
+            }
+
         }
 
         public void onCollisionStay(PhysicsBody x)

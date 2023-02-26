@@ -10,14 +10,14 @@ namespace Shard
 {
     class AnimationSystem
     {
-        public bool isPlaying;
+        public bool isPlaying = true;
         int counter;
         int index;
         List<string> animation = new List<string>();
 
         public void playAnimation(int duration, Transform trans)
         {
-            if (animation.Count <= 1) return;
+            if (animation.Count <= 1 || !isPlaying) return;
 
             counter++;
             if (counter % duration == 0)
@@ -29,7 +29,6 @@ namespace Shard
 
             if (index > animation.Count - 1) return;
             else trans.SpritePath = Bootstrap.getAssetManager().getAssetPath(animation[index]);
-            isPlaying = true;
         }
 
         public void loadAnimation(string fileName, int frames)
@@ -43,16 +42,40 @@ namespace Shard
 
         public void PlayAnimationOnce(int duration, Transform trans)
         {
-            int index_once = 0;
-            for (int counter = 0; counter < animation.Count * duration; counter++)
+            if (!isPlaying) return;
+
+            if (index == 0) // play first frame if not played yet
             {
-                if (counter % duration == 0)
+                trans.SpritePath = Bootstrap.getAssetManager().getAssetPath(animation[0]);
+                index++;
+                return;
+            }
+
+            counter++;
+            if (counter % duration == 0)
+            {
+                counter = 0;
+                if (index <= animation.Count - 1)
                 {
-                    trans.SpritePath = Bootstrap.getAssetManager().getAssetPath(animation[index_once]);
-                    index_once++;
+                    isPlaying = true;
+                    trans.SpritePath = Bootstrap.getAssetManager().getAssetPath(animation[index]);
+                    index++;
+                }
+                else
+                {
+                    isPlaying = false; // exit loop when end of animation is reached
                 }
             }
         }
+        public void StopAnimation()
+        {
+            isPlaying = false;
+        }
+        public void StartAnimation()
+        {
+            isPlaying = true;
+        }
     }
+
 }
 
