@@ -106,6 +106,10 @@ namespace GameAssignment
                 if (right || left) runAni.playAnimation(8, this.Transform);
                 else idleAni.playAnimation(10, this.Transform);
             }
+            else
+            {
+                jumpAni.playAnimation(15, this.Transform);
+            }
 
 
             if (jumpUp)
@@ -173,7 +177,7 @@ namespace GameAssignment
                 health--;
                 runAni.StopAnimation();
                 idleAni.StopAnimation();
-                isHurt = true;            
+                isHurt = true;
             }
         }
 
