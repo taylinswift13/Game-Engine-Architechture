@@ -138,7 +138,7 @@ namespace Shard
         {
             fontLibrary = new Dictionary<string, IntPtr>();
 
-            setSize(1080, 720);
+            setSize(992, 544);
 
             SDL.SDL_Init(SDL.SDL_INIT_EVERYTHING);
             SDL_ttf.TTF_Init();

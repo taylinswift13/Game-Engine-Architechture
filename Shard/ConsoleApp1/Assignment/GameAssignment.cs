@@ -32,8 +32,12 @@ namespace Shard
             //sound2Channel = sm.playSound(fire, 0.7f, false);
 
             background = new GameObject();
-            background.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("backdrop.jpg");
-            background.addTag("bg");
+            background.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("Background_1.png");
+            background.Transform.Wid = 992;
+            background.Transform.Ht = 544;
+            background.Transform.Scalex = 1;
+            background.Transform.Scaley = 1;
+
 
 
             rand = new Random();
@@ -56,12 +60,11 @@ namespace Shard
 
         public override void update()
         {
+            //Bootstrap.getDisplay().showText("FPS: " + Bootstrap.getSecondFPS() + " / " + 
+            //                                 Bootstrap.getFPS(), 10, 10, 12, 255, 255, 255);
             background.Transform.X = Bootstrap.camPos.X;
             background.Transform.Y = Bootstrap.camPos.Y;
             Bootstrap.getDisplay().addToDraw(background);
-
-            //Bootstrap.getDisplay().showText("FPS: " + Bootstrap.getSecondFPS() + " / " + 
-            //                                 Bootstrap.getFPS(), 10, 10, 12, 255, 255, 255);
 
             //sound1Status = sm.getSoundStatus(sound1Channel);
             //Console.WriteLine("Sound 1 status: " + sound1Status);
@@ -69,8 +72,8 @@ namespace Shard
             //sound2Status = sm.getSoundStatus(sound2Channel);
             //Console.WriteLine("Sound 2 status: " + sound2Status);
 
-            camera.FollowGameObject(Bootstrap.playerPos, 0.1f);
-            //Console.WriteLine("player: " + player.Transform.X + " " + player.Transform.Y);
+            camera.FollowGameObject(Bootstrap.playerPos, 0.03f);
+            Console.WriteLine("player: " + player.Transform.X + " " + player.Transform.Y);
         }
 
         public override int getTargetFrameRate()

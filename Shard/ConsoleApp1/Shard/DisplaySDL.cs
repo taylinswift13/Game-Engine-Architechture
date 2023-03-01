@@ -233,10 +233,11 @@ namespace Shard
                 tRect.w = sRect.w;
                 tRect.h = sRect.h;
 
-                if (trans.SpritePath == Bootstrap.getAssetManager().getAssetPath("backdrop.jpg"))
+                if (trans.SpritePath == Bootstrap.getAssetManager().getAssetPath("Background_1.png") ||
+                    trans.SpritePath == Bootstrap.getAssetManager().getAssetPath("Background_2.png"))
                 {
-                    sRect.w = trans.Wid;
-                    sRect.h = trans.Ht;
+                    sRect.w = (int)(trans.Wid * trans.Scalex);
+                    sRect.h = (int)(trans.Ht * trans.Scaley);
                     tRect.w = sRect.w;
                     tRect.h = sRect.h;
                 }
