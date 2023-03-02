@@ -20,7 +20,7 @@ namespace Shard
             previousPosition = Position;
 
             // Clamp the camera's position to the game world
-            Position.X = Math.Max(0, Math.Min(Position.X, 2 * bgSize.X - Size.X));
+            Position.X = Math.Max(0, Math.Min(Position.X, 1.5f * bgSize.X - Size.X));
             Position.Y = Math.Max(0, Math.Min(Position.Y, bgSize.Y - Size.Y));
 
             // Update the camera position and size in the Bootstrap class

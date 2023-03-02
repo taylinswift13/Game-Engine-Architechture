@@ -15,7 +15,7 @@ namespace Shard
         Player player;
         Random rand;
         BackgroundManager bgFront, bgBack;
-        List<Platform> platform;
+        List<Platform> tile;
 
         //SFX
         SoundManager sm = new SoundManager();
@@ -42,15 +42,17 @@ namespace Shard
 
             //Level
             rand = new Random();
-            platform = new List<Platform>();
-            Platform grass1 = new Platform(0, 150, 3);
-            Platform grass2 = new Platform(350, 200, 2);
-            Platform grass3 = new Platform(200, 0, 1);
-            Platform grass4 = new Platform(100, 100, 1);
+            tile = new List<Platform>();
             /*for (int i = 0; i < 0; i++)
             {
                 platform.Add(new Platform(rand.Next(0, 10) * 100, rand.Next(0, 10) * 100, rand.Next(1, 3)));
             }*/
+
+            Platform tile1 = new(0, 394, 1);
+            tile1.initialize();
+
+            Platform tile2 = new(175, 75, 2);
+            tile2.initialize();
 
             //Enemy
             Bush bush = new Bush(450, 164);

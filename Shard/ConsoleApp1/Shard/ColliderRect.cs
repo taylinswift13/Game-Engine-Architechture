@@ -244,8 +244,5 @@ namespace Shard
 
             return null;
         }
-
     }
-
-
 }

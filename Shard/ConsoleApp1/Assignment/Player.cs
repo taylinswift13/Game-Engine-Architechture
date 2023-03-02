@@ -29,8 +29,8 @@ namespace GameAssignment
             this.Transform.X = 0.0f;
             this.Transform.Y = 0.0f;
             this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("player_idle1.png");
-            this.Transform.Scalex = 2;
-            this.Transform.Scaley = 2;
+            this.Transform.Scalex = 1.25f;
+            this.Transform.Scaley = 1.25f;
 
             idleAni = new AnimationSystem();
             idleAni.loadAnimation("player_idle", 4);
@@ -46,6 +46,7 @@ namespace GameAssignment
             MyBody.UsesGravity = true;
             MyBody.StopOnCollision = true;
             MyBody.addRectCollider();
+            //MyBody.Kinematic = true;
 
             wid = Bootstrap.getDisplay().getWidth();
             Bootstrap.getInput().addListener(this);

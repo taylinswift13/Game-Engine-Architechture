@@ -7,44 +7,42 @@ namespace GameAssignment
     class Platform : GameObject, InputListener, CollisionHandler
     {
         private int health;
-        Vector2 TilePos;
-
-        int type;
+        private bool physicsEnabled; // new field to store whether physics is enabled or not
+        private int type;
         public int Health { get => health; set => health = value; }
+
+        public Platform(int x, int y, int type, bool physicsEnabled  = true) // added physicsEnabled parameter with default value of true
+        {
+            this.physicsEnabled = physicsEnabled; // store whether physics is enabled or not
+            Transform.X = x / Bootstrap.CamViewScale;
+            Transform.Y = y / Bootstrap.CamViewScale;
+            this.type = type;
+        }
 
         public override void initialize()
         {
-            setPhysicsEnabled();
+            Transform.Scalex = 0.5f;
+            Transform.Scaley = 0.5f;
 
-            MyBody.Mass = 1;
-            MyBody.Kinematic = true;
-
-            MyBody.addRectCollider();
-
-            this.Transform.Scalex = 0.5f;
-            this.Transform.Scaley = 0.5f;
-            addTag("Platform");
-
-        }
-        public Platform(int x, int y, int type)
-        {
-            TilePos.X = x;
-            TilePos.Y = y;
-
-            this.Transform.X = x;
-            this.Transform.Y = y;
-            this.type = type;
+            if (physicsEnabled) // check if physics is enabled before setting up the physics body
+            {
+                addTag("Platform");
+                setPhysicsEnabled();
+                MyBody.Mass = 1;
+                MyBody.Kinematic = true;
+                MyBody.addRectCollider();
+            }
         }
 
         public void handleInput(InputEvent inp, string eventType)
         {
         }
 
-
         public override void update()
         {
-            this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("grass" + type + ".png");
+            this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("Tile_" + type + ".png");
             Bootstrap.getDisplay().addToDraw(this);
+            Console.WriteLine(physicsEnabled);
         }
 
         public void onCollisionEnter(PhysicsBody x)
@@ -66,4 +64,5 @@ namespace GameAssignment
 
     }
 }
+
 
