@@ -18,7 +18,6 @@ namespace GameAssignment
             direction = false;
             setPhysicsEnabled();
             distance = 0;
-            range = 150;
             MyBody.Mass = 1;
             this.Transform.Scalex = 1.5f;
             this.Transform.Scaley = 1.5f;
@@ -28,10 +27,14 @@ namespace GameAssignment
             addTag("Bush");
 
         }
-        public Bush(int x, int y)
+        public Bush(int x, int y, bool flip, float size, int range)
         {
-            this.Transform.X = x;
-            this.Transform.Y = y;
+            this.Transform.X = x / Bootstrap.CamViewScale;
+            this.Transform.Y = y / Bootstrap.CamViewScale;
+            this.Transform.FlipVertical = flip;
+            this.Transform.Scalex = size;
+            this.Transform.Scaley = size;
+            this.range = range;
         }
 
         public void handleInput(InputEvent inp, string eventType)

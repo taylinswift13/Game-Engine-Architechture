@@ -43,10 +43,6 @@ namespace Shard
             //Level
             rand = new Random();
             tile = new List<Platform>();
-            /*for (int i = 0; i < 0; i++)
-            {
-                platform.Add(new Platform(rand.Next(0, 10) * 100, rand.Next(0, 10) * 100, rand.Next(1, 3)));
-            }*/
 
             Platform tile1 = new(0, 394, 1);
             tile1.initialize();
@@ -54,8 +50,7 @@ namespace Shard
             Platform tile2 = new(175, 75, 2);
             tile2.initialize();
 
-            //Enemy
-            Bush bush = new Bush(450, 164);
+            Bush bush = new Bush(200, 120, true, 1f, 50);
 
             //Player and camera
             player = new Player();
