@@ -26,7 +26,6 @@ namespace Shard
         IntPtr font;
         IntPtr lblText;
 
-
         public TextDetails(string text, double x, double y, SDL.SDL_Color col, int spacing)
         {
             this.text = text;
@@ -35,7 +34,6 @@ namespace Shard
             this.col = col;
             this.size = spacing;
         }
-
         public string Text
         {
             get => text;
