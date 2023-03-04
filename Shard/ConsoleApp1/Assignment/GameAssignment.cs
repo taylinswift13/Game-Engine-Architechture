@@ -47,10 +47,34 @@ namespace Shard
             Platform tile1 = new(0, 394, 1);
             tile1.initialize();
 
-            Platform tile2 = new(175, 75, 2);
+            Platform tile2 = new(100, 25, 2);
             tile2.initialize();
 
-            Bush bush = new Bush(200, 120, true, 1f, 50);
+            Platform tile3 = new(350, 294, 3);
+            tile3.initialize();
+
+            Platform tile4 = new(450, 394, 4);
+            tile4.initialize();
+
+            Platform tile5 = new(750, 25, 2);
+            tile5.initialize();
+
+            Platform tile6 = new(900, 444, 5);
+            tile6.initialize();
+
+            Platform tile7 = new(1300, 75, 6);
+            tile7.initialize();
+
+            Platform tile8 = new(1500, 25, 6);
+            tile8.initialize();
+
+            Platform tile9 = new(1784, 344, 7);
+            tile9.initialize();
+
+            //Enemy (36 x 24)
+            Bush bush = new(264, 75, true, 0.5f, 75);
+            Bush bush_1 = new(914, 75, true, 0.5f, 75);
+            Bush bush_2 = new(900, 420, false, 0.5f, 75);
 
             //Player and camera
             player = new Player();
@@ -75,7 +99,7 @@ namespace Shard
             //Console.WriteLine("Sound 1 status: " + sound1Status);
 
             camera.FollowGameObject(Bootstrap.playerPos, 0.03f);
-            Console.WriteLine("player: " + player.Transform.X + " " + player.Transform.Y);
+            //Console.WriteLine("player: " + player.Transform.X + " " + player.Transform.Y);
         }
 
         public override int getTargetFrameRate()

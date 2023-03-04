@@ -10,7 +10,7 @@ namespace GameAssignment
     {
         int health, wid;
         bool left, right, jumpUp, inTheAir, stopForce, isHurt;
-        double jumpCount, jumpSpeed = 350;
+        double jumpCount, jumpSpeed = 275;
         AnimationSystem idleAni;
         AnimationSystem runAni;
         AnimationSystem hurtAni;
@@ -26,8 +26,8 @@ namespace GameAssignment
             stopForce = false;
             isHurt = false;
 
-            this.Transform.X = 0.0f;
-            this.Transform.Y = 0.0f;
+            this.Transform.X = 0.0f / Bootstrap.CamViewScale;
+            this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
             this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("player_idle1.png");
             this.Transform.Scalex = 1.25f;
             this.Transform.Scaley = 1.25f;
@@ -201,6 +201,5 @@ namespace GameAssignment
         {
             return "Player: [" + Transform.X + ", " + Transform.Y + ", " + Transform.Wid + ", " + Transform.Ht + "]";
         }
-
     }
 }

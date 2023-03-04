@@ -42,7 +42,6 @@ namespace GameAssignment
         {
             this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("Tile_" + type + ".png");
             Bootstrap.getDisplay().addToDraw(this);
-            Console.WriteLine(physicsEnabled);
         }
 
         public void onCollisionEnter(PhysicsBody x)
