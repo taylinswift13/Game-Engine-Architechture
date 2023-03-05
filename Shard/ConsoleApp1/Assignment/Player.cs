@@ -16,6 +16,11 @@ namespace GameAssignment
         AnimationSystem hurtAni;
         AnimationSystem jumpAni;
 
+        SoundManager sm = new SoundManager();
+        int sound1Channel;
+        SoundStatus sound1Status;
+        string hurt = "hurt.wav";
+
         public int Health { get => health; set => health = value; }
         public override void initialize()
         {
@@ -25,7 +30,7 @@ namespace GameAssignment
             inTheAir = false;
             stopForce = false;
             isHurt = false;
-
+            health = 3;
             this.Transform.X = 0.0f / Bootstrap.CamViewScale;
             this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
             this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("player_idle1.png");
@@ -47,6 +52,8 @@ namespace GameAssignment
             MyBody.StopOnCollision = true;
             MyBody.addRectCollider();
             //MyBody.Kinematic = true;
+
+            sm.initializeAudioSystem();
 
             wid = Bootstrap.getDisplay().getWidth();
             Bootstrap.getInput().addListener(this);
@@ -178,6 +185,8 @@ namespace GameAssignment
                 health--;
                 runAni.StopAnimation();
                 idleAni.StopAnimation();
+                hurtAni.StartAnimation();
+                sound1Channel = sm.playSound(hurt, 1f);
                 isHurt = true;
             }
         }

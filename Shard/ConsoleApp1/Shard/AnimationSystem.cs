@@ -74,6 +74,8 @@ namespace Shard
         public void StartAnimation()
         {
             isPlaying = true;
+            index = 0;
+            counter = 0;
         }
     }
 

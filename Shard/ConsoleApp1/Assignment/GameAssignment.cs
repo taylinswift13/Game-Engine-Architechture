@@ -5,6 +5,7 @@ using SDL2;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Drawing;
 
 namespace Shard
 {
@@ -16,18 +17,19 @@ namespace Shard
         Random rand;
         BackgroundManager bgFront, bgBack;
         List<Platform> tile;
+        List<Heart> hearts;
 
         //SFX
         SoundManager sm = new SoundManager();
         int sound1Channel;
         SoundStatus sound1Status;
-        string BGM = "BGM.wav";
+        string BGM = "BGM2.wav";
 
         public override void initialize()
         {
             //Sound
             sm.initializeAudioSystem();
-            sound1Channel = sm.playSound(BGM, 0.5f, true);
+            sound1Channel = sm.playSound(BGM, 0.3f, true);
 
             //Background
             bgBack = new BackgroundManager(new Vector2(992, 544));
@@ -43,6 +45,7 @@ namespace Shard
             //Level
             rand = new Random();
             tile = new List<Platform>();
+            hearts = new List<Heart>();
 
             Platform tile1 = new(0, 394, 1);
             tile1.initialize();
@@ -76,32 +79,53 @@ namespace Shard
             Bush bush_1 = new(914, 75, true, 0.5f, 75);
             Bush bush_2 = new(900, 420, false, 0.5f, 75);
 
+
             //Player and camera
             player = new Player();
             camera = new Camera()
             {
                 Size = new Vector2(Bootstrap.getDisplay().getWidth(), Bootstrap.getDisplay().getHeight())
             };
+            hearts.Add(new Heart(50, 50));
+            hearts.Add(new Heart(100, 50));
+            hearts.Add(new Heart(150, 50));
         }
 
         public override void update()
         {
             //Bootstrap.getDisplay().showText("FPS: " + Bootstrap.getSecondFPS() + " / " + 
             //                                 Bootstrap.getFPS(), 10, 10, 12, 255, 255, 255);
-
             //Backgrounds
             bgBack.Update(0.25f);
             bgFront.Update(0.5f);
             bgBack.Draw();
             bgFront.Draw();
 
-            //sound1Status = sm.getSoundStatus(sound1Channel);
-            //Console.WriteLine("Sound 1 status: " + sound1Status);
-
             camera.FollowGameObject(Bootstrap.playerPos, 0.03f);
-            //Console.WriteLine("player: " + player.Transform.X + " " + player.Transform.Y);
-        }
 
+            if (player.Health < hearts.Count)
+            {
+                hearts[player.Health].ToBeDestroyed = true;
+                hearts.RemoveAt(player.Health);
+            }
+
+            if (isRunning() == false)
+            {
+                Color col = Color.FromArgb(rand.Next(0, 256), rand.Next(0, 256), rand.Next(0, 256));
+                Bootstrap.getDisplay().showText("GAME OVER!", 300, 300, 128, col);
+                return;
+            }
+        }
+        public override bool isRunning()
+        {
+
+            if (hearts.Count == 0)
+            {
+                return false;
+            }
+            return true;
+
+        }
         public override int getTargetFrameRate()
         {
             return 60;

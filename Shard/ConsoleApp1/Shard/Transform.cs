@@ -31,6 +31,7 @@ namespace Shard
         private Vector2 right, centre;
         private bool flipHorizontal;
         private bool flipVertical;
+        private bool isUI;
 
         public Vector2 getLastDirection()
         {
@@ -49,7 +50,7 @@ namespace Shard
             centre = new Vector2();
             flipHorizontal = false;
             flipVertical = false;
-
+            isUI = false;
             scalex = 1.0f;
             scaley = 1.0f;
 
@@ -153,6 +154,7 @@ namespace Shard
         public float Scalex { get => scalex; set => scalex = value; }
         public bool FlipHorizontal { get => flipHorizontal; set => flipHorizontal = value; }
         public bool FlipVertical { get => flipVertical; set => flipVertical = value; }
+        public bool IsUI { get => isUI; set => isUI = value; }
         public float Scaley { get => scaley; set => scaley = value; }
         public float Lx { get => lx; set => lx = value; }
         public float Ly { get => ly; set => ly = value; }

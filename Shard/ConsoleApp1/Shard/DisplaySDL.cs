@@ -226,8 +226,17 @@ namespace Shard
                 sRect.w = (int)(trans.Wid * trans.Scalex * Bootstrap.CamViewScale);
                 sRect.h = (int)(trans.Ht * trans.Scaley * Bootstrap.CamViewScale);
 
-                tRect.x = (int)(trans.X - Bootstrap.camPos.X) * Bootstrap.CamViewScale;
-                tRect.y = (int)(trans.Y - Bootstrap.camPos.Y) * Bootstrap.CamViewScale;
+                if (trans.IsUI)
+                {
+                    tRect.x = (int)(Bootstrap.getDisplay().getWidth() - trans.X);
+                    tRect.y = (int)(Bootstrap.getDisplay().getHeight() - trans.Y);
+                }
+                else
+                {
+                    tRect.x = (int)(trans.X - Bootstrap.camPos.X) * Bootstrap.CamViewScale;
+                    tRect.y = (int)(trans.Y - Bootstrap.camPos.Y) * Bootstrap.CamViewScale;
+                }
+
                 //tRect.x = (int)trans.X;
                 //tRect.y = (int)trans.Y;
                 tRect.w = sRect.w;
