@@ -8,6 +8,9 @@ namespace GameAssignment
 {
     class Player : GameObject, InputListener, CollisionHandler
     {
+        Vector2 gameWorld = new Vector2(1984, 544);
+        Vector2 playerSpriteSize = new Vector2(22, 23);
+
         int health, wid;
         bool left, right, jumpUp, inTheAir, stopForce, isHurt;
         double jumpCount, jumpSpeed = 275;
@@ -17,9 +20,11 @@ namespace GameAssignment
         AnimationSystem jumpAni;
 
         SoundManager sm = new SoundManager();
-        int sound1Channel;
-        SoundStatus sound1Status;
+        int sound1Channel, sound2Channel, sound3Channel;
+        //SoundStatus sound1Status;
         string hurt = "hurt.wav";
+        string jump = "Jump.wav";
+        string gravity = "Gravity.wav";
 
         public int Health { get => health; set => health = value; }
         public override void initialize()
@@ -34,6 +39,7 @@ namespace GameAssignment
             this.Transform.X = 0.0f / Bootstrap.CamViewScale;
             this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
             this.Transform.SpritePath = Bootstrap.getAssetManager().getAssetPath("player_idle1.png");
+            //27.5, 28.75
             this.Transform.Scalex = 1.25f;
             this.Transform.Scaley = 1.25f;
 
@@ -79,6 +85,7 @@ namespace GameAssignment
                 if (inp.Key == (int)SDL.SDL_Scancode.SDL_SCANCODE_SPACE && !inTheAir)
                 {
                     jumpUp = true;
+                    sound2Channel = sm.playSound(jump, 0.3f, false);
                 }
 
                 //inverse gravity
@@ -88,6 +95,7 @@ namespace GameAssignment
                     if (!Transform.FlipVertical) Transform.FlipVertical = true;
                     else Transform.FlipVertical = false;
                     inTheAir = true;
+                    sound3Channel = sm.playSound(gravity, 0.3f, false);
                 }
 
             }
@@ -107,6 +115,9 @@ namespace GameAssignment
 
         public override void update()
         {
+            Console.WriteLine("X: " + this.Transform.X);
+            Console.WriteLine("Y: " + this.Transform.Y);
+
             Bootstrap.playerPos = new Vector2(this.Transform.X, this.Transform.Y);
             Bootstrap.getDisplay().addToDraw(this);
             if (!inTheAir)
@@ -148,6 +159,39 @@ namespace GameAssignment
                 }
             }
 
+            if (this.Transform.X > (gameWorld.X / Bootstrap.CamViewScale) + (playerSpriteSize.X * this.Transform.Scalex)) 
+            {
+                this.Transform.X = 60.0f / Bootstrap.CamViewScale;
+                this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
+                health--;
+            }
+
+            if (this.Transform.X < 0 - (playerSpriteSize.X * this.Transform.Scalex))
+            {
+                this.Transform.X = 60.0f / Bootstrap.CamViewScale;
+                this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
+                health--;
+            }
+
+            if (this.Transform.Y > (gameWorld.Y / Bootstrap.CamViewScale) + (playerSpriteSize.Y * this.Transform.Scaley)) 
+            {
+                this.Transform.X = 60.0f / Bootstrap.CamViewScale;
+                this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
+                health--;
+            }
+
+            if (this.Transform.Y < 0 - (playerSpriteSize.Y * this.Transform.Scaley)) 
+            {
+                if (Bootstrap.gravityDir == -1) 
+                {
+                    Bootstrap.gravityDir = -Bootstrap.gravityDir;
+                    if (!Transform.FlipVertical) Transform.FlipVertical = true;
+                    else Transform.FlipVertical = false;
+                }
+                this.Transform.X = 60.0f / Bootstrap.CamViewScale;
+                this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
+                health--;
+            }
         }
 
         public override void physicsUpdate()
@@ -198,7 +242,6 @@ namespace GameAssignment
             {
                 stopForce = false;
             }
-
         }
 
         public void onCollisionStay(PhysicsBody x)

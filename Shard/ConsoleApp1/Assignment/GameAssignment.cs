@@ -94,7 +94,8 @@ namespace Shard
         public override void update()
         {
             //Bootstrap.getDisplay().showText("FPS: " + Bootstrap.getSecondFPS() + " / " + 
-            //                                 Bootstrap.getFPS(), 10, 10, 12, 255, 255, 255);
+                                            //Bootstrap.getFPS(), 10, 10, 12, 255, 255, 255);
+
             //Backgrounds
             bgBack.Update(0.25f);
             bgFront.Update(0.5f);
