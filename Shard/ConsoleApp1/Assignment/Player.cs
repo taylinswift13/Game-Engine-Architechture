@@ -159,11 +159,16 @@ namespace GameAssignment
                 }
             }
 
-            if (this.Transform.X > (gameWorld.X / Bootstrap.CamViewScale) + (playerSpriteSize.X * this.Transform.Scalex)) 
+            if (this.Transform.X > (gameWorld.X / Bootstrap.CamViewScale) + (playerSpriteSize.X * this.Transform.Scalex))
             {
                 this.Transform.X = 60.0f / Bootstrap.CamViewScale;
                 this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
                 health--;
+                runAni.StopAnimation();
+                idleAni.StopAnimation();
+                hurtAni.StartAnimation();
+                sound1Channel = sm.playSound(hurt, 1f);
+                isHurt = true;
             }
 
             if (this.Transform.X < 0 - (playerSpriteSize.X * this.Transform.Scalex))
@@ -171,18 +176,28 @@ namespace GameAssignment
                 this.Transform.X = 60.0f / Bootstrap.CamViewScale;
                 this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
                 health--;
+                runAni.StopAnimation();
+                idleAni.StopAnimation();
+                hurtAni.StartAnimation();
+                sound1Channel = sm.playSound(hurt, 1f);
+                isHurt = true;
             }
 
-            if (this.Transform.Y > (gameWorld.Y / Bootstrap.CamViewScale) + (playerSpriteSize.Y * this.Transform.Scaley)) 
+            if (this.Transform.Y > (gameWorld.Y / Bootstrap.CamViewScale) + (playerSpriteSize.Y * this.Transform.Scaley))
             {
                 this.Transform.X = 60.0f / Bootstrap.CamViewScale;
                 this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
                 health--;
+                runAni.StopAnimation();
+                idleAni.StopAnimation();
+                hurtAni.StartAnimation();
+                sound1Channel = sm.playSound(hurt, 1f);
+                isHurt = true;
             }
 
-            if (this.Transform.Y < 0 - (playerSpriteSize.Y * this.Transform.Scaley)) 
+            if (this.Transform.Y < 0 - (playerSpriteSize.Y * this.Transform.Scaley))
             {
-                if (Bootstrap.gravityDir == -1) 
+                if (Bootstrap.gravityDir == -1)
                 {
                     Bootstrap.gravityDir = -Bootstrap.gravityDir;
                     if (!Transform.FlipVertical) Transform.FlipVertical = true;
@@ -191,6 +206,11 @@ namespace GameAssignment
                 this.Transform.X = 60.0f / Bootstrap.CamViewScale;
                 this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
                 health--;
+                runAni.StopAnimation();
+                idleAni.StopAnimation();
+                hurtAni.StartAnimation();
+                sound1Channel = sm.playSound(hurt, 1f);
+                isHurt = true;
             }
         }
 
