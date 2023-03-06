@@ -163,6 +163,7 @@ namespace GameAssignment
             {
                 this.Transform.X = 60.0f / Bootstrap.CamViewScale;
                 this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
+                sound1Channel = sm.playSound(hurt, 1f);
                 health--;
             }
 
@@ -170,6 +171,7 @@ namespace GameAssignment
             {
                 this.Transform.X = 60.0f / Bootstrap.CamViewScale;
                 this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
+                sound1Channel = sm.playSound(hurt, 1f);
                 health--;
             }
 
@@ -177,6 +179,7 @@ namespace GameAssignment
             {
                 this.Transform.X = 60.0f / Bootstrap.CamViewScale;
                 this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
+                sound1Channel = sm.playSound(hurt, 1f);
                 health--;
             }
 
@@ -190,6 +193,7 @@ namespace GameAssignment
                 }
                 this.Transform.X = 60.0f / Bootstrap.CamViewScale;
                 this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
+                sound1Channel = sm.playSound(hurt, 1f);
                 health--;
             }
         }
