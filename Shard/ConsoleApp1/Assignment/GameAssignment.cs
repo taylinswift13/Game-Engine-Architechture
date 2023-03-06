@@ -18,6 +18,7 @@ namespace Shard
         BackgroundManager bgFront, bgBack;
         List<Platform> tile;
         List<Heart> hearts;
+        Winpoint winPoint;
 
         //SFX
         SoundManager sm = new SoundManager();
@@ -89,12 +90,15 @@ namespace Shard
             hearts.Add(new Heart(50, 50));
             hearts.Add(new Heart(100, 50));
             hearts.Add(new Heart(150, 50));
+
+            winPoint = new Winpoint(1900, 250);
+
         }
 
         public override void update()
         {
             //Bootstrap.getDisplay().showText("FPS: " + Bootstrap.getSecondFPS() + " / " + 
-                                            //Bootstrap.getFPS(), 10, 10, 12, 255, 255, 255);
+            //Bootstrap.getFPS(), 10, 10, 12, 255, 255, 255);
 
             //Backgrounds
             bgBack.Update(0.25f);
@@ -112,15 +116,28 @@ namespace Shard
 
             if (isRunning() == false)
             {
-                Color col = Color.FromArgb(rand.Next(0, 256), rand.Next(0, 256), rand.Next(0, 256));
-                Bootstrap.getDisplay().showText("GAME OVER!", 300, 300, 128, col);
-                return;
+                if (hearts.Count == 0)
+                {
+                    Color col = Color.FromArgb(rand.Next(0, 256), rand.Next(0, 256), rand.Next(0, 256));
+                    Bootstrap.getDisplay().showText("GAME OVER!", 150, 200, 128, col);
+                    return;
+                }
+                else if (winPoint.Win == true)
+                {
+                    Color col = Color.FromArgb(rand.Next(0, 256), rand.Next(0, 256), rand.Next(0, 256));
+                    Bootstrap.getDisplay().showText("YOU WIN!", 150, 200, 128, col);
+                    return;
+                }
             }
         }
         public override bool isRunning()
         {
 
             if (hearts.Count == 0)
+            {
+                return false;
+            }
+            if (winPoint.Win == true)
             {
                 return false;
             }
