@@ -8,7 +8,7 @@ namespace GameAssignment
 {
     class Player : GameObject, InputListener, CollisionHandler
     {
-        Vector2 gameWorld = new Vector2(1984, 544);
+        Vector2 gameWorld = new Vector2(2976, 544);
         Vector2 playerSpriteSize = new Vector2(22, 23);
 
         int health, wid;

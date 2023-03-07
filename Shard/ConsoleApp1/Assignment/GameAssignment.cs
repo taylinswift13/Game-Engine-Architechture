@@ -37,11 +37,13 @@ namespace Shard
             bgBack.AddBackground("Background_2.png", 0, 0, 1, 1);
             bgBack.AddBackground("Background_2.png", 992, 0, 1, 1);
             bgBack.AddBackground("Background_2.png", 1984, 0, 1, 1);
+            bgBack.AddBackground("Background_2.png", 2976, 0, 1, 1);
 
             bgFront = new BackgroundManager(new Vector2(992, 544));
             bgFront.AddBackground("Background_1.png", 0, 0, 1, 1);
             bgFront.AddBackground("Background_1.png", 992, 0, 1, 1);
             bgFront.AddBackground("Background_1.png", 1984, 0, 1, 1);
+            bgFront.AddBackground("Background_1.png", 2976, 0, 1, 1);
 
             //Level
             rand = new Random();
@@ -50,36 +52,45 @@ namespace Shard
 
             Platform tile1 = new(0, 394, 1);
             tile1.initialize();
-
             Platform tile2 = new(100, 25, 2);
             tile2.initialize();
-
             Platform tile3 = new(350, 294, 3);
             tile3.initialize();
-
             Platform tile4 = new(450, 394, 4);
             tile4.initialize();
-
             Platform tile5 = new(750, 25, 2);
             tile5.initialize();
-
             Platform tile6 = new(900, 444, 5);
             tile6.initialize();
-
             Platform tile7 = new(1300, 75, 6);
             tile7.initialize();
-
             Platform tile8 = new(1500, 25, 6);
             tile8.initialize();
-
             Platform tile9 = new(1784, 344, 7);
             tile9.initialize();
+            Platform tile10 = new(1984, 394, 8);
+            tile10.initialize();
+            Platform tile11 = new(2284, 344, 9);
+            tile11.initialize();
+            Platform tile12 = new(2364, 25, 9);
+            tile12.initialize();
+            Platform tile13 = new(2519, 494, 6);
+            tile13.initialize();
+            Platform tile14 = new(2644, 344, 9);
+            tile14.initialize();
+            Platform tile15 = new(2726, 0, 6);
+            tile15.initialize();
+            Platform tile16 = new(2826, 150, 9);
+            tile16.initialize();
+
 
             //Enemy (36 x 24)
             Bush bush = new(264, 75, true, 0.5f, 75);
             Bush bush_1 = new(914, 75, true, 0.5f, 75);
             Bush bush_2 = new(900, 420, false, 0.5f, 75);
-
+            Bush bush_3 = new(1948, 320, false, 0.5f, 75); 
+            Bush bush_4 = new(2364, 75, true, 0.5f, 75);
+            Bush bush_5 = new(2940, 200, true, 0.5f, 75);
 
             //Player and camera
             player = new Player();
@@ -91,14 +102,16 @@ namespace Shard
             hearts.Add(new Heart(100, 50));
             hearts.Add(new Heart(150, 50));
 
-            winPoint = new Winpoint(1900, 250);
-
+            winPoint = new Winpoint(2926, 90);
         }
 
         public override void update()
         {
             //Bootstrap.getDisplay().showText("FPS: " + Bootstrap.getSecondFPS() + " / " + 
             //Bootstrap.getFPS(), 10, 10, 12, 255, 255, 255);
+
+            //sound1Status = sm.getSoundStatus(sound1Channel);
+            //Console.WriteLine("Sound 1: " + sound1Status);
 
             //Backgrounds
             bgBack.Update(0.25f);
