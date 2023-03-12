@@ -85,7 +85,7 @@ namespace GameAssignment
                 if (inp.Key == (int)SDL.SDL_Scancode.SDL_SCANCODE_SPACE && !inTheAir)
                 {
                     jumpUp = true;
-                    sound2Channel = sm.playSound(jump, 0.3f, false);
+                    sound2Channel = sm.playSound(jump, 0.2f, false);
                 }
 
                 //inverse gravity
@@ -95,7 +95,7 @@ namespace GameAssignment
                     if (!Transform.FlipVertical) Transform.FlipVertical = true;
                     else Transform.FlipVertical = false;
                     inTheAir = true;
-                    sound3Channel = sm.playSound(gravity, 0.3f, false);
+                    sound3Channel = sm.playSound(gravity, 0.2f, false);
                 }
 
             }
@@ -115,8 +115,8 @@ namespace GameAssignment
 
         public override void update()
         {
-            Console.WriteLine("X: " + this.Transform.X);
-            Console.WriteLine("Y: " + this.Transform.Y);
+            //Console.WriteLine("X: " + this.Transform.X);
+            //Console.WriteLine("Y: " + this.Transform.Y);
 
             Bootstrap.playerPos = new Vector2(this.Transform.X, this.Transform.Y);
             Bootstrap.getDisplay().addToDraw(this);
@@ -163,12 +163,11 @@ namespace GameAssignment
             {
                 this.Transform.X = 60.0f / Bootstrap.CamViewScale;
                 this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
-                sound1Channel = sm.playSound(hurt, 1f);
+                sound1Channel = sm.playSound(hurt, 0.2f);
                 health--;
                 runAni.StopAnimation();
                 idleAni.StopAnimation();
                 hurtAni.StartAnimation();
-                sound1Channel = sm.playSound(hurt, 1f);
                 isHurt = true;
             }
 
@@ -176,12 +175,11 @@ namespace GameAssignment
             {
                 this.Transform.X = 60.0f / Bootstrap.CamViewScale;
                 this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
-                sound1Channel = sm.playSound(hurt, 1f);
+                sound1Channel = sm.playSound(hurt, 0.2f);
                 health--;
                 runAni.StopAnimation();
                 idleAni.StopAnimation();
                 hurtAni.StartAnimation();
-                sound1Channel = sm.playSound(hurt, 1f);
                 isHurt = true;
             }
 
@@ -189,12 +187,11 @@ namespace GameAssignment
             {
                 this.Transform.X = 60.0f / Bootstrap.CamViewScale;
                 this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
-                sound1Channel = sm.playSound(hurt, 1f);
+                sound1Channel = sm.playSound(hurt, 0.2f);
                 health--;
                 runAni.StopAnimation();
                 idleAni.StopAnimation();
                 hurtAni.StartAnimation();
-                sound1Channel = sm.playSound(hurt, 1f);
                 isHurt = true;
             }
 
@@ -208,12 +205,11 @@ namespace GameAssignment
                 }
                 this.Transform.X = 60.0f / Bootstrap.CamViewScale;
                 this.Transform.Y = 325.0f / Bootstrap.CamViewScale;
-                sound1Channel = sm.playSound(hurt, 1f);
+                sound1Channel = sm.playSound(hurt, 0.2f);
                 health--;
                 runAni.StopAnimation();
                 idleAni.StopAnimation();
                 hurtAni.StartAnimation();
-                sound1Channel = sm.playSound(hurt, 1f);
                 isHurt = true;
             }
         }

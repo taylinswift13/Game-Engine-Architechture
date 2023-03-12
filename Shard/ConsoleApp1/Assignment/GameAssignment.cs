@@ -30,7 +30,7 @@ namespace Shard
         {
             //Sound
             sm.initializeAudioSystem();
-            sound1Channel = sm.playSound(BGM, 0.3f, true);
+            sound1Channel = sm.playSound(BGM, 0.1f, true);
 
             //Background
             bgBack = new BackgroundManager(new Vector2(992, 544));

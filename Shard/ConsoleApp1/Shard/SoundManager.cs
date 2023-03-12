@@ -1,14 +1,5 @@
-﻿/*
-*
-*   A very simple implementation of a very simple sound system.
-*   @author Michael Heron
-*   @version 1.0
-*   
-*/
-
-using SDL2;
+﻿using SDL2;
 using System;
-using System.IO;
 
 namespace Shard
 {
