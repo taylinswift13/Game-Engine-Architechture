@@ -1,7 +1,4 @@
 ﻿using GameAssignment;
-
-using SDL2;
-
 using System;
 using System.Collections.Generic;
 using System.Numerics;
@@ -30,6 +27,7 @@ namespace Shard
         {
             //Sound
             sm.initializeAudioSystem();
+
             sound1Channel = sm.playSound(BGM, 0.1f, true);
 
             //Background
@@ -110,8 +108,8 @@ namespace Shard
             //Bootstrap.getDisplay().showText("FPS: " + Bootstrap.getSecondFPS() + " / " + 
             //Bootstrap.getFPS(), 10, 10, 12, 255, 255, 255);
 
-            //sound1Status = sm.getSoundStatus(sound1Channel);
-            //Console.WriteLine("Sound 1: " + sound1Status);
+            sound1Status = sm.getSoundStatus(sound1Channel);
+            Console.WriteLine("Sound 1: " + sound1Status);
 
             //Backgrounds
             bgBack.Update(0.25f);
